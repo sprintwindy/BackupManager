@@ -21,6 +21,11 @@ class BackupManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // use the vendor configuration file as fallback
+        $this->mergeConfigFrom(
+            __DIR__.'/config/config.php', 'dick.backupmanager'
+        );
+
         // use this if your package has views
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
