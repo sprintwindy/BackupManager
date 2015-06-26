@@ -23,7 +23,7 @@ class BackupController extends Controller {
 
 	public function index()
 	{
-		$disk = Storage::disk('local');
+		$disk = Storage::disk(config('dick.backupmanager.disk'));
 		$files = $disk->files('backups');
 		$this->data['backups'] = [];
 
@@ -73,7 +73,7 @@ class BackupController extends Controller {
 	        abort(403, 'Unauthorized access - you do not have the necessary permission to download backups.');
 	    }
 
-		$disk = Storage::disk('local');
+		$disk = Storage::disk(config('dick.backupmanager.disk'));
 
 		if ($disk->exists('backups/'.$file_name)) {
 			return response()->download(storage_path('backups/'.$file_name));
@@ -93,7 +93,7 @@ class BackupController extends Controller {
 	        abort(403, 'Unauthorized access - you do not have the necessary permission to delete backups.');
 	    }
 
-		$disk = Storage::disk('local');
+		$disk = Storage::disk(config('dick.backupmanager.disk'));
 
 		if ($disk->exists('backups/'.$file_name)) {
 			$disk->delete('backups/'.$file_name);
