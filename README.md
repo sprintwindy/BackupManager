@@ -1,11 +1,11 @@
 # backupmanager
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/tabacitu/backupmanager.svg?style=flat-square)](https://packagist.org/packages/tabacitu/backupmanager)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/dick/backupmanager.svg?style=flat-square)](https://packagist.org/packages/dick/backupmanager)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/tabacitu/backupmanager/master.svg?style=flat-square)](https://travis-ci.org/tabacitu/backupmanager)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/tabacitu/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/tabacitu/backupmanager/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/tabacitu/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/tabacitu/backupmanager)
-[![Total Downloads](https://img.shields.io/packagist/dt/tabacitu/backupmanager.svg?style=flat-square)](https://packagist.org/packages/tabacitu/backupmanager)
+[![Build Status](https://img.shields.io/travis/dick/backupmanager/master.svg?style=flat-square)](https://travis-ci.org/dick/backupmanager)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/dick/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/dick/backupmanager/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/dick/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/dick/backupmanager)
+[![Total Downloads](https://img.shields.io/packagist/dt/dick/backupmanager.svg?style=flat-square)](https://packagist.org/packages/dick/backupmanager)
 
 An admin interface for managing backups (download and delete). Used in the Dick Admin package, on Laravel 5.
 
