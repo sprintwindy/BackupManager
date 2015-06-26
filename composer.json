@@ -1,5 +1,5 @@
 {
-    "name": "Dick/BackupManager",
+    "name": "dick/backupmanager",
     "description": "Admin interface for managing backups in Dick, on Laravel 5.",
     "keywords": [
         "dick",
