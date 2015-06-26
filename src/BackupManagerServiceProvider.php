@@ -30,7 +30,7 @@ class BackupManagerServiceProvider extends ServiceProvider
         // use this if your package needs a config file
         $this->publishes([
                 __DIR__.'/config/config.php' => config_path('dick/backupmanager.php'),
-        ]);
+        ], 'config');
     }
 
     /**
