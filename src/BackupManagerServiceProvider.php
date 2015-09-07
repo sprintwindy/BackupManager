@@ -29,9 +29,6 @@ class BackupManagerServiceProvider extends ServiceProvider
         // use this if your package has views
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
-        // use this if your package has routes
-        $this->setupRoutes($this->app->router);
-
         // use this if your package needs a config file
         $this->publishes([
                 __DIR__.'/config/config.php' => config_path('dick/backupmanager.php'),
@@ -60,6 +57,7 @@ class BackupManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBackupManager();
+        $this->setupRoutes($this->app->router);
 
         // use this if your package has a config file
         config([
