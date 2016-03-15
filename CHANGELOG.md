@@ -20,6 +20,13 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+
+## 1.1.1 - 2016-03-15
+
+### Fixed
+- Correct name in readme. Confirming packagist hook.
+
+
 ## 1.1 - 2016-03-15
 
 ### Added
