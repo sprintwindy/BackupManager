@@ -1,13 +1,18 @@
-@extends('admin.layout')
+@extends('backpack::layout')
 
-@section('content-header')
+@section('after_styles')
+    <!-- Ladda Buttons (loading buttons) -->
+    <link href="{{ asset('vendor/backpack/ladda/ladda-themeless.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('header')
 	<section class="content-header">
 	  <h1>
-	    {{ trans('backup.backup') }}
+	    {{ trans('backpack::backup.backup') }}
 	  </h1>
 	  <ol class="breadcrumb">
 	    <li><a href="{{ url('admin/dashboard') }}">Admin</a></li>
-	    <li class="active">{{ trans('backup.backup') }}</li>
+	    <li class="active">{{ trans('backpack::backup.backup') }}</li>
 	  </ol>
 	</section>
 @endsection
@@ -16,31 +21,27 @@
 <!-- Default box -->
   <div class="box">
     <div class="box-body">
-      <button id="create-new-backup-button" href="{{ url('admin/backup/create') }}" class="btn btn-primary ladda-button" data-style="zoom-in"><span class="ladda-label"><i class="fa fa-plus"></i> {{ trans('backup.create_a_new_backup') }}</span></button>
+      <button id="create-new-backup-button" href="{{ url('admin/backup/create') }}" class="btn btn-primary ladda-button" data-style="zoom-in"><span class="ladda-label"><i class="fa fa-plus"></i> {{ trans('backpack::backup.create_a_new_backup') }}</span></button>
       <br>
-      <h3>{{ trans('backup.existing_backups') }}:</h3>
+      <h3>{{ trans('backpack::backup.existing_backups') }}:</h3>
       <table class="table table-hover table-condensed">
         <thead>
           <tr>
             <th>#</th>
-            <th>{{ trans('backup.date') }}</th>
-            <th class="text-right">{{ trans('backup.file_size') }}</th>
-            <th>{{ trans('backup.actions') }}</th>
+            <th>{{ trans('backpack::backup.date') }}</th>
+            <th class="text-right">{{ trans('backpack::backup.file_size') }}</th>
+            <th>{{ trans('backpack::backup.actions') }}</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($backups as $k => $b)
           <tr>
             <th scope="row">{{ $k+1 }}</th>
-            <td>{{ Carbon::createFromTimeStamp($b['last_modified'])->formatLocalized('%d %B %Y, %H:%M') }}</td>
+            <td>{{ \Carbon\Carbon::createFromTimeStamp($b['last_modified'])->formatLocalized('%d %B %Y, %H:%M') }}</td>
             <td class="text-right">{{ round((int)$b['file_size']/1048576, 2).' MB' }}</td>
             <td>
-              @if (\Entrust::can('download-backups'))
-                <a class="btn btn-xs btn-default" href="{{ url('admin/backup/download/'.$b['file_name']) }}"><i class="fa fa-cloud-download"></i> {{ trans('backup.download') }}</a>
-              @endif
-              @if (\Entrust::can('delete-backups'))
-                <a class="btn btn-xs btn-danger" data-button-type="delete" href="{{ url('admin/backup/delete/'.$b['file_name']) }}"><i class="fa fa-trash-o"></i> {{ trans('backup.delete') }}</a>
-              @endif
+                <a class="btn btn-xs btn-default" href="{{ url('admin/backup/download/'.$b['file_name']) }}"><i class="fa fa-cloud-download"></i> {{ trans('backpack::backup.download') }}</a>
+                <a class="btn btn-xs btn-danger" data-button-type="delete" href="{{ url('admin/backup/delete/'.$b['file_name']) }}"><i class="fa fa-trash-o"></i> {{ trans('backpack::backup.delete') }}</a>
             </td>
           </tr>
           @endforeach
@@ -52,7 +53,11 @@
 
 @endsection
 
-@section('scripts')
+@section('after_scripts')
+    <!-- Ladda Buttons (loading buttons) -->
+    <script src="{{ asset('vendor/backpack/ladda/spin.js') }}"></script>
+    <script src="{{ asset('vendor/backpack/ladda/ladda.js') }}"></script>
+
 <script>
   jQuery(document).ready(function($) {
 
@@ -79,8 +84,8 @@
                     l.setProgress( 0.9 );
                     // Show an alert with the result
                     new PNotify({
-                        title: "{{ trans('backup.create_confirmation_title') }}",
-                        text: "{{ trans('backup.create_confirmation_message') }}",
+                        title: "{{ trans('backpack::backup.create_confirmation_title') }}",
+                        text: "{{ trans('backpack::backup.create_confirmation_message') }}",
                         type: "success"
                     });
                     // Stop loading
@@ -94,8 +99,8 @@
                     l.setProgress( 0.9 );
                     // Show an alert with the result
                     new PNotify({
-                        title: "{{ trans('backup.create_error_title') }}",
-                        text: "{{ trans('backup.create_error_message') }}",
+                        title: "{{ trans('backpack::backup.create_error_title') }}",
+                        text: "{{ trans('backpack::backup.create_error_message') }}",
                         type: "warning"
                     });
                     // Stop loading
@@ -110,15 +115,15 @@
         var delete_button = $(this);
         var delete_url = $(this).attr('href');
 
-        if (confirm("{{ trans('backup.delete_confirm') }}") == true) {
+        if (confirm("{{ trans('backpack::backup.delete_confirm') }}") == true) {
             $.ajax({
                 url: delete_url,
                 type: 'DELETE',
                 success: function(result) {
                     // Show an alert with the result
                     new PNotify({
-                        title: "{{ trans('backup.delete_confirmation_title') }}",
-                        text: "{{ trans('backup.delete_confirmation_message') }}",
+                        title: "{{ trans('backpack::backup.delete_confirmation_title') }}",
+                        text: "{{ trans('backpack::backup.delete_confirmation_message') }}",
                         type: "success"
                     });
                     // delete the row from the table
@@ -127,16 +132,16 @@
                 error: function(result) {
                     // Show an alert with the result
                     new PNotify({
-                        title: "{{ trans('backup.delete_error_title') }}",
-                        text: "{{ trans('backup.delete_error_message') }}",
+                        title: "{{ trans('backpack::backup.delete_error_title') }}",
+                        text: "{{ trans('backpack::backup.delete_error_message') }}",
                         type: "warning"
                     });
                 }
             });
         } else {
             new PNotify({
-                title: "{{ trans('backup.delete_cancel_title') }}",
-                text: "{{ trans('backup.delete_cancel_message') }}",
+                title: "{{ trans('backpack::backup.delete_cancel_title') }}",
+                text: "{{ trans('backpack::backup.delete_cancel_message') }}",
                 type: "info"
             });
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dick\BackupManager;
+namespace Backpack\BackupManager;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
@@ -23,16 +23,16 @@ class BackupManagerServiceProvider extends ServiceProvider
     {
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
-            __DIR__.'/config/config.php', 'dick.backupmanager'
+            __DIR__.'/config/laravel-backup.php', 'backpack.backupmanager'
         );
 
         // use this if your package has views
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
-        // use this if your package needs a config file
-        $this->publishes([
-                __DIR__.'/config/config.php' => config_path('dick/backupmanager.php'),
-        ], 'config');
+        // publish config file
+        $this->publishes([ __DIR__.'/config/laravel-backup.php' => config_path('laravel-backup.php'), ], 'config');
+        // publish lang files
+        $this->publishes([ __DIR__.'/resources/lang' => resource_path('lang/vendor/backpack'), ], 'lang');
     }
 
     /**
@@ -43,9 +43,9 @@ class BackupManagerServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Dick\BackupManager\Http\Controllers'], function($router)
+        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function($router)
         {
-            require __DIR__.'/Http/routes.php';
+            require __DIR__.'/app/Http/routes.php';
         });
     }
 
@@ -61,7 +61,7 @@ class BackupManagerServiceProvider extends ServiceProvider
 
         // use this if your package has a config file
         config([
-                'config/config.php',
+                'config/laravel-backup.php',
         ]);
     }
 

@@ -1,4 +1,4 @@
-<?php namespace Dick\BackupManager\Http\Controllers;
+<?php namespace Backpack\BackupManager\app\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,17 +14,13 @@ class BackupController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
-
-		// Check for the right roles to access these pages
-		if (!\Entrust::can('view-backups')) {
-	        abort(403, 'Unauthorized access - you do not have the necessary permissions to see this page.');
-	    }
 	}
 
 	public function index()
 	{
-		$disk = Storage::disk(config('dick.backupmanager.disk'));
-		$files = $disk->files('backups');
+		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
+		// dd($disk);
+		$files = $disk->files();
 		$this->data['backups'] = [];
 
 		// make an array of backup files, with their filesize and creation date
@@ -48,10 +44,6 @@ class BackupController extends Controller {
 
 	public function create()
 	{
-		if (!\Entrust::can('make-backups')) {
-	        abort(403, 'Unauthorized access - you do not have the necessary permission to make backups.');
-	    }
-
 	    try {
 	      Artisan::call('backup:run');
 	      echo 'done backup:run';
@@ -69,13 +61,9 @@ class BackupController extends Controller {
 	 */
 	public function download($file_name)
 	{
-		if (!\Entrust::can('download-backups')) {
-	        abort(403, 'Unauthorized access - you do not have the necessary permission to download backups.');
-	    }
+		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
 
-		$disk = Storage::disk(config('dick.backupmanager.disk'));
-
-		if ($disk->exists('backups/'.$file_name)) {
+		if ($disk->exists($file_name)) {
 			return response()->download(storage_path('backups/'.$file_name));
 		}
 		else
@@ -89,14 +77,10 @@ class BackupController extends Controller {
 	 */
 	public function delete($file_name)
 	{
-		if (!\Entrust::can('delete-backups')) {
-	        abort(403, 'Unauthorized access - you do not have the necessary permission to delete backups.');
-	    }
+		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
 
-		$disk = Storage::disk(config('dick.backupmanager.disk'));
-
-		if ($disk->exists('backups/'.$file_name)) {
-			$disk->delete('backups/'.$file_name);
+		if ($disk->exists($file_name)) {
+			$disk->delete($file_name);
 
 			return 'success';
 		}
