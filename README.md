@@ -63,7 +63,9 @@ protected function schedule(Schedule $schedule)
 
 ## Check that it works
 
-If the "unknown error" yellow bubble is thrown and you see the _Backup failed because The dump process failed with exitcode 127 : Command not found._ error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location. You can do that in your config/database.php file, where you define your database credentials, by adding the _dump_command_path_ variable. Example for Mac OS X's MAMP:
+If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location. 
+
+You can do that in your config/database.php file, where you define your database credentials, by adding the _dump_command_path_ variable. Example for Mac OS X's MAMP:
 
 ```php
 'mysql' => [
@@ -86,6 +88,9 @@ If the "unknown error" yellow bubble is thrown and you see the _Backup failed be
 Point and click, baby. Point and click.
 
 Try at **your-project-domain/admin/backup**
+
+![Backpack\BackupManager screenshot](https://infinit.io/_/cU2PtmD.png)
+
 
 ## Change log
 

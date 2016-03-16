@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.3 - 2016-03-16
+
+### Fixed
+- Eliminated console logs from backup js.
+- Added screenshot in README.
+
 ## 1.1.2 - 2016-03-16
 
 ### Fixed

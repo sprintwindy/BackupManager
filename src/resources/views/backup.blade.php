@@ -83,8 +83,6 @@
                 success: function(result) {
                     l.setProgress( 0.9 );
                     // Show an alert with the result
-                    console.log(result);
-                    console.log(result.indexOf('failed'));
                     if (result.indexOf('failed') >= 0) {
                         new PNotify({
                             title: "{{ trans('backpack::backup.create_warning_title') }}",
