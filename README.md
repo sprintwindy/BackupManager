@@ -44,7 +44,7 @@ This is where you choose a different driver if you want your backups to be store
 5) [optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
-<li><a href="{{ url('admin/backupmanager') }}"><i class="fa fa-hdd-o"></i> <span>Logs</span></a></li>
+<li><a href="{{ url('admin/backup') }}"><i class="fa fa-hdd-o"></i> <span>Backups</span></a></li>
 ```
 
 6) [optional] Modify your backup options in config/laravel-backup.php
