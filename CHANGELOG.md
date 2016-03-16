@@ -20,6 +20,11 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.4 - 2016-03-16
+
+### Fixed
+- Added page title.
+
 ## 1.1.3 - 2016-03-16
 
 ### Fixed
