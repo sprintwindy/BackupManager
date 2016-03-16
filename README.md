@@ -49,6 +49,38 @@ This is where you choose a different driver if you want your backups to be store
 
 6) [optional] Modify your backup options in config/laravel-backup.php
 
+7) [optional] Instruct Laravel to run the backups automatically in your console kernel:
+
+```php
+// app/Console/Kernel.php
+
+protected function schedule(Schedule $schedule)
+{
+   $schedule->command('backup:clean')->daily()->at('04:00');
+   $schedule->command('backup:run')->daily()->at('05:00');
+}
+```
+
+## Check that it works
+
+If the "unknown error" yellow bubble is thrown and you see the _Backup failed because The dump process failed with exitcode 127 : Command not found._ error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location. You can do that in your config/database.php file, where you define your database credentials, by adding the _dump_command_path_ variable. Example for Mac OS X's MAMP:
+
+```php
+'mysql' => [
+            'driver'            => 'mysql',
+            'host'              => env('DB_HOST', 'localhost'),
+            'database'          => env('DB_DATABASE', 'forge'),
+            'username'          => env('DB_USERNAME', 'forge'),
+            'password'          => env('DB_PASSWORD', ''),
+            'charset'           => 'utf8',
+            'collation'         => 'utf8_unicode_ci',
+            'prefix'            => '',
+            'strict'            => false,
+            'engine'            => null,
+            'dump_command_path' => "/Applications/MAMP/Library/bin/",
+        ],
+```
+
 ## Usage
 
 Point and click, baby. Point and click.

@@ -20,6 +20,16 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.2 - 2016-03-16
+
+### Fixed
+- Made the backup button work.
+- Added another error type - the warning when something failed.
+- Logging the progress in the log files.
+- Showing the artisan command output in the ajax response.
+- Added the dump_command_path configuration.
+- Changed README to instruct on common misconfiguration issue.
+
 
 ## 1.1.1 - 2016-03-15
 

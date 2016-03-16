@@ -83,11 +83,24 @@
                 success: function(result) {
                     l.setProgress( 0.9 );
                     // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backpack::backup.create_confirmation_title') }}",
-                        text: "{{ trans('backpack::backup.create_confirmation_message') }}",
-                        type: "success"
-                    });
+                    console.log(result);
+                    console.log(result.indexOf('failed'));
+                    if (result.indexOf('failed') >= 0) {
+                        new PNotify({
+                            title: "{{ trans('backpack::backup.create_warning_title') }}",
+                            text: "{{ trans('backpack::backup.create_warning_message') }}",
+                            type: "warning"
+                        });
+                    }
+                    else
+                    {
+                        new PNotify({
+                            title: "{{ trans('backpack::backup.create_confirmation_title') }}",
+                            text: "{{ trans('backpack::backup.create_confirmation_message') }}",
+                            type: "success"
+                        });
+                    }
+
                     // Stop loading
                     l.setProgress( 1 );
                     l.stop();

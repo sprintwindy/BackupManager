@@ -8,13 +8,9 @@ use App;
 use Storage;
 use Carbon\Carbon;
 use Artisan;
+use Log;
 
 class BackupController extends Controller {
-
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
 
 	public function index()
 	{
@@ -45,8 +41,14 @@ class BackupController extends Controller {
 	public function create()
 	{
 	    try {
+	      // start the backup process
 	      Artisan::call('backup:run');
-	      echo 'done backup:run';
+	      $output = Artisan::output();
+	    	// $output = "backup failed";
+	      // log the results
+	      Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n".$output);
+	      // return the results as a response to the ajax call
+	      echo($output);
 	    } catch (Exception $e) {
 	      Response::make($e->getMessage(), 500);
 	    }
