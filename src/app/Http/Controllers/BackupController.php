@@ -15,7 +15,7 @@ class BackupController extends Controller {
 	public function index()
 	{
 		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
-		// dd($disk);
+
 		$files = $disk->files();
 		$this->data['backups'] = [];
 
@@ -44,7 +44,7 @@ class BackupController extends Controller {
 	      // start the backup process
 	      Artisan::call('backup:run');
 	      $output = Artisan::output();
-	    	// $output = "backup failed";
+
 	      // log the results
 	      Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n".$output);
 	      // return the results as a response to the ajax call
