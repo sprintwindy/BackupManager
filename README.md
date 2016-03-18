@@ -9,6 +9,7 @@
 
 An admin interface for managing backups (download and delete). Used in the Backpack package, on Laravel 5.2+
 
+**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.** 
 
 ![Backpack\BackupManager screenshot](https://infinit.io/_/cU2PtmD.png)
 
