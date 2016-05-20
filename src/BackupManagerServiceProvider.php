@@ -2,8 +2,8 @@
 
 namespace Backpack\BackupManager;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 
 class BackupManagerServiceProvider extends ServiceProvider
 {
@@ -30,21 +30,21 @@ class BackupManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
         // publish config file
-        $this->publishes([ __DIR__.'/config/laravel-backup.php' => config_path('laravel-backup.php'), ], 'config');
+        $this->publishes([__DIR__.'/config/laravel-backup.php' => config_path('laravel-backup.php')], 'config');
         // publish lang files
-        $this->publishes([ __DIR__.'/resources/lang' => resource_path('lang/vendor/backpack'), ], 'lang');
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
     }
 
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function($router)
-        {
+        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function ($router) {
             require __DIR__.'/app/Http/routes.php';
         });
     }
@@ -67,7 +67,7 @@ class BackupManagerServiceProvider extends ServiceProvider
 
     private function registerBackupManager()
     {
-        $this->app->bind('backupmanager',function($app){
+        $this->app->bind('backupmanager', function ($app) {
             return new BackupManager($app);
         });
     }
