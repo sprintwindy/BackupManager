@@ -13,7 +13,7 @@ class BackupController extends Controller
     {
         $disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
 
-        $files = $disk->files();
+        $files = $disk->allFiles();
         $this->data['backups'] = [];
 
         // make an array of backup files, with their filesize and creation date

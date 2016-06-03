@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.5 - 2016-06-03
+
+### Fixed
+- Showing zip files from subfolders, too, since laravel-backup stores them that way.
+
+
 ## 1.1.4 - 2016-03-16
 
 ### Fixed
