@@ -59,12 +59,12 @@ class BackupController extends Controller
      *
      * TODO: make it work no matter the flysystem driver (S3 Bucket, etc).
      */
-    public function download($file_name)
+    public function download($folder_name, $file_name)
     {
         $disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
 
-        if ($disk->exists($file_name)) {
-            return response()->download(storage_path('backups/'.$file_name));
+        if ($disk->exists($folder_name.'/'.$file_name)) {
+            return response()->download(storage_path('backups/'.$folder_name.'/'.$file_name));
         } else {
             abort(404, "The backup file doesn't exist.");
         }
@@ -73,12 +73,12 @@ class BackupController extends Controller
     /**
      * Deletes a backup file.
      */
-    public function delete($file_name)
+    public function delete($folder_name, $file_name)
     {
         $disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
 
-        if ($disk->exists($file_name)) {
-            $disk->delete($file_name);
+        if ($disk->exists($folder_name.'/'.$file_name)) {
+            $disk->delete($folder_name.'/'.$file_name);
 
             return 'success';
         } else {

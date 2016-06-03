@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.6 - 2016-06-03
+
+### Fixed
+- Download and delete buttons now work too, for subfolders.
+
+
 ## 1.1.5 - 2016-06-03
 
 ### Fixed
