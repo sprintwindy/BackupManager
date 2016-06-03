@@ -85,7 +85,9 @@ You can do that in your config/database.php file, where you define your database
             'prefix'            => '',
             'strict'            => false,
             'engine'            => null,
-            'dump_command_path' => "/Applications/MAMP/Library/bin/",
+            'dump_command_path' => '/Applications/MAMP/Library/bin/', // only the path, so without 'mysqldump' or 'pg_dump'
+            'dump_command_timeout' => 60 * 5, // 5 minute timeout
+            'dump_using_single_transaction' => true, // perform dump using a single transaction
         ],
 ```
 
