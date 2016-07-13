@@ -30,6 +30,8 @@ All Notable changes to `backupmanager` will be documented in this file
 - Download link is no longer dependant on the suggested backups storage disk.
 - Hidden download link if not using the Local filesystem.
 
+### Removed
+- Subfolder listing and downloading.
 
 ## 1.1.6 - 2016-06-03
 
