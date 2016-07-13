@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function() {
 
     // Backup
     Route::get('backup', 'BackupController@index');
