@@ -44,7 +44,7 @@ class BackupManagerServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function($router) {
+        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function ($router) {
             require __DIR__.'/app/Http/routes.php';
         });
     }
@@ -67,7 +67,7 @@ class BackupManagerServiceProvider extends ServiceProvider
 
     private function registerBackupManager()
     {
-        $this->app->bind('backupmanager', function($app) {
+        $this->app->bind('backupmanager', function ($app) {
             return new BackupManager($app);
         });
     }
