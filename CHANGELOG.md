@@ -20,6 +20,16 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.5 - 2016-07-13
+
+### Added
+- Showing files from multiple disks.
+- Can delete files from other disks, other than local (tested Dropbox).
+
+### Fixed
+- Download link is no longer dependant on the suggested backups storage disk.
+
+
 ## 1.1.4 - 2016-03-16
 
 ### Fixed

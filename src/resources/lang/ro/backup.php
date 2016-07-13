@@ -33,4 +33,5 @@ return [
 	'create_error_message' 			=> 'Copia de siguranță NU a putut fi creată.',
 	'create_warning_title'			=> 'Eroare necunoscută',
 	'create_warning_message' 		=> 'Copia de siguranță e posibil să NU fi fost creată. Verificați fișierele de log pentru detalii.',
+	'location' 						=> 'Locație',
 ];

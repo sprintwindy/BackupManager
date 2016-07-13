@@ -14,21 +14,28 @@ class BackupController extends Controller {
 
 	public function index()
 	{
-		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
+		if (!count(config('laravel-backup.backup.destination.disks'))) {
+			dd('No disks backup configured in config/laravel-backup.php');
+		}
 
-		$files = $disk->files();
 		$this->data['backups'] = [];
 
-		// make an array of backup files, with their filesize and creation date
-		foreach ($files as $k => $f) {
-			// only take the zip files into account
-			if (substr($f, -4) == '.zip' && $disk->exists($f)) {
-				$this->data['backups'][] = [
-											'file_path' => $f,
-											'file_name' => str_replace('backups/', '', $f),
-											'file_size' => $disk->size($f),
-											'last_modified' => $disk->lastModified($f),
-											];
+		foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
+			$disk = Storage::disk($disk_name);
+			$files = $disk->files();
+
+			// make an array of backup files, with their filesize and creation date
+			foreach ($files as $k => $f) {
+				// only take the zip files into account
+				if (substr($f, -4) == '.zip' && $disk->exists($f)) {
+					$this->data['backups'][] = [
+						'file_path' => $f,
+						'file_name' => str_replace('backups/', '', $f),
+						'file_size' => $disk->size($f),
+						'last_modified' => $disk->lastModified($f),
+						'disk' => $disk_name,
+						];
+				}
 			}
 		}
 
@@ -42,6 +49,7 @@ class BackupController extends Controller {
 	public function create()
 	{
 	    try {
+	      ini_set('max_execution_time', 300);
 	      // start the backup process
 	      Artisan::call('backup:run');
 	      $output = Artisan::output();
@@ -54,24 +62,31 @@ class BackupController extends Controller {
 	      Response::make($e->getMessage(), 500);
 	    }
 
-	    // return 'success';
+	    return 'success';
 	}
 
 	/**
 	 * Downloads a backup zip file.
-	 *
-	 * TODO: make it work no matter the flysystem driver (S3 Bucket, etc).
 	 */
 	public function download($file_name)
 	{
-		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
+		$disk = Storage::disk(\Request::input('disk'));
+		$adapter = $disk->getDriver()->getAdapter();
 
-		if ($disk->exists($file_name)) {
-			return response()->download(storage_path('backups/'.$file_name));
+		if ($adapter instanceof LocalAdapter) {
+			$storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
+
+			if ($disk->exists($file_name)) {
+				return response()->download($storage_path.$file_name);
+			}
+			else
+			{
+				abort(404, "The backup file doesn't exist.");
+			}
 		}
 		else
 		{
-			abort(404, "The backup file doesn't exist.");
+			abort(404, "Only downloads from the Local filesystem are supported.");
 		}
 	}
 
@@ -80,7 +95,7 @@ class BackupController extends Controller {
 	 */
 	public function delete($file_name)
 	{
-		$disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
+		$disk = Storage::disk(\Request::input('disk'));
 
 		if ($disk->exists($file_name)) {
 			$disk->delete($file_name);
