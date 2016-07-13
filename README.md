@@ -5,10 +5,12 @@
 [![Build Status](https://img.shields.io/travis/laravel-backpack/backupmanager/master.svg?style=flat-square)](https://travis-ci.org/laravel-backpack/backupmanager)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/laravel-backpack/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-backpack/backupmanager/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-backpack/backupmanager.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-backpack/backupmanager)
+[![Style CI](https://styleci.io/repos/53956594/shield)](https://styleci.io/repos/53956594)
 [![Total Downloads](https://img.shields.io/packagist/dt/backpack/backupmanager.svg?style=flat-square)](https://packagist.org/packages/backpack/backupmanager)
 
 An admin interface for managing backups (download and delete). Used in the Backpack package, on Laravel 5.2+
 
+**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.** 
 
 ![Backpack\BackupManager screenshot](https://infinit.io/_/cU2PtmD.png)
 
@@ -83,7 +85,9 @@ You can do that in your config/database.php file, where you define your database
             'prefix'            => '',
             'strict'            => false,
             'engine'            => null,
-            'dump_command_path' => "/Applications/MAMP/Library/bin/",
+            'dump_command_path' => '/Applications/MAMP/Library/bin/', // only the path, so without 'mysqldump' or 'pg_dump'
+            'dump_command_timeout' => 60 * 5, // 5 minute timeout
+            'dump_using_single_transaction' => true, // perform dump using a single transaction
         ],
 ```
 

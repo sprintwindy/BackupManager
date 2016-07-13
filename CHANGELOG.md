@@ -20,7 +20,7 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
-## 1.1.5 - 2016-07-13
+## 1.1.7 - 2016-07-13
 
 ### Added
 - Showing files from multiple disks.
@@ -28,6 +28,19 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ### Fixed
 - Download link is no longer dependant on the suggested backups storage disk.
+- Hidden download link if not using the Local filesystem.
+
+
+## 1.1.6 - 2016-06-03
+
+### Fixed
+- Download and delete buttons now work too, for subfolders.
+
+
+## 1.1.5 - 2016-06-03
+
+### Fixed
+- Showing zip files from subfolders, too, since laravel-backup stores them that way.
 
 
 ## 1.1.4 - 2016-03-16

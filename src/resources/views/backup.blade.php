@@ -31,7 +31,7 @@
             <th>{{ trans('backpack::backup.location') }}</th>
             <th>{{ trans('backpack::backup.date') }}</th>
             <th class="text-right">{{ trans('backpack::backup.file_size') }}</th>
-            <th>{{ trans('backpack::backup.actions') }}</th>
+            <th class="text-right">{{ trans('backpack::backup.actions') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -41,8 +41,10 @@
             <td>{{ $b['disk'] }}</td>
             <td>{{ \Carbon\Carbon::createFromTimeStamp($b['last_modified'])->formatLocalized('%d %B %Y, %H:%M') }}</td>
             <td class="text-right">{{ round((int)$b['file_size']/1048576, 2).' MB' }}</td>
-            <td>
+            <td class="text-right">
+                @if ($b['download'])
                 <a class="btn btn-xs btn-default" href="{{ url('admin/backup/download/'.$b['file_name']) }}?disk={{ $b['disk'] }}"><i class="fa fa-cloud-download"></i> {{ trans('backpack::backup.download') }}</a>
+                @endif
                 <a class="btn btn-xs btn-danger" data-button-type="delete" href="{{ url('admin/backup/delete/'.$b['file_name']) }}?disk={{ $b['disk'] }}"><i class="fa fa-trash-o"></i> {{ trans('backpack::backup.delete') }}</a>
             </td>
           </tr>

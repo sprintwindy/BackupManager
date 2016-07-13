@@ -15,13 +15,14 @@ class BackupController extends Controller {
 	public function index()
 	{
 		if (!count(config('laravel-backup.backup.destination.disks'))) {
-			dd('No disks backup configured in config/laravel-backup.php');
+			dd(trans('backpack::backup.no_disks_configured'));
 		}
 
 		$this->data['backups'] = [];
 
 		foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
 			$disk = Storage::disk($disk_name);
+			$adapter = $disk->getDriver()->getAdapter();
 			$files = $disk->files();
 
 			// make an array of backup files, with their filesize and creation date
@@ -34,6 +35,7 @@ class BackupController extends Controller {
 						'file_size' => $disk->size($f),
 						'last_modified' => $disk->lastModified($f),
 						'disk' => $disk_name,
+						'download' => ($adapter instanceof \League\Flysystem\Adapter\Local)?true:false
 						];
 				}
 			}
@@ -73,7 +75,7 @@ class BackupController extends Controller {
 		$disk = Storage::disk(\Request::input('disk'));
 		$adapter = $disk->getDriver()->getAdapter();
 
-		if ($adapter instanceof LocalAdapter) {
+		if ($adapter instanceof \League\Flysystem\Adapter\Local) {
 			$storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
 			if ($disk->exists($file_name)) {
@@ -81,12 +83,12 @@ class BackupController extends Controller {
 			}
 			else
 			{
-				abort(404, "The backup file doesn't exist.");
+				abort(404, trans('backpack::backup.backup_doesnt_exist'));
 			}
 		}
 		else
 		{
-			abort(404, "Only downloads from the Local filesystem are supported.");
+			abort(404, trans('backpack::backup.only_local_downloads_supported'));
 		}
 	}
 
@@ -104,7 +106,7 @@ class BackupController extends Controller {
 		}
 		else
 		{
-			abort(404, "The backup file doesn't exist.");
+			abort(404, trans('backpack::backup.backup_doesnt_exist'));
 		}
 	}
 }
