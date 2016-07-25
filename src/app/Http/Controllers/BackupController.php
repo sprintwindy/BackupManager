@@ -23,7 +23,7 @@ class BackupController extends Controller {
 		foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
 			$disk = Storage::disk($disk_name);
 			$adapter = $disk->getDriver()->getAdapter();
-			$files = $disk->files();
+			$files = $disk->allFiles();
 
 			// make an array of backup files, with their filesize and creation date
 			foreach ($files as $k => $f) {
@@ -70,9 +70,10 @@ class BackupController extends Controller {
 	/**
 	 * Downloads a backup zip file.
 	 */
-	public function download($file_name)
+	public function download()
 	{
 		$disk = Storage::disk(\Request::input('disk'));
+		$file_name = \Request::input('file_name');
 		$adapter = $disk->getDriver()->getAdapter();
 
 		if ($adapter instanceof \League\Flysystem\Adapter\Local) {
