@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.8 - 2016-07-25
+
+### Fixed
+- Download button with subfolders.
+
+
 ## 1.1.7 - 2016-07-13
 
 ### Added
