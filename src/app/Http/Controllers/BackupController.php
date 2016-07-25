@@ -1,4 +1,4 @@
-<?php
+<?php namespace Backpack\BackupManager\app\Http\Controllers;
 
 namespace Backpack\BackupManager\app\Http\Controllers;
 
@@ -17,10 +17,10 @@ class BackupController extends Controller
 
         $this->data['backups'] = [];
 
-        foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
-            $disk = Storage::disk($disk_name);
-            $adapter = $disk->getDriver()->getAdapter();
-            $files = $disk->files();
+		foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
+			$disk = Storage::disk($disk_name);
+			$adapter = $disk->getDriver()->getAdapter();
+			$files = $disk->allFiles();
 
             // make an array of backup files, with their filesize and creation date
             foreach ($files as $k => $f) {
@@ -64,40 +64,47 @@ class BackupController extends Controller
         return 'success';
     }
 
-    /**
-     * Downloads a backup zip file.
-     */
-    public function download($file_name)
-    {
-        $disk = Storage::disk(\Request::input('disk'));
-        $adapter = $disk->getDriver()->getAdapter();
+	/**
+	 * Downloads a backup zip file.
+	 */
+	public function download()
+	{
+		$disk = Storage::disk(\Request::input('disk'));
+		$file_name = \Request::input('file_name');
+		$adapter = $disk->getDriver()->getAdapter();
 
-        if ($adapter instanceof \League\Flysystem\Adapter\Local) {
-            $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
+		if ($adapter instanceof \League\Flysystem\Adapter\Local) {
+			$storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
-            if ($disk->exists($file_name)) {
-                return response()->download($storage_path.$file_name);
-            } else {
-                abort(404, trans('backpack::backup.backup_doesnt_exist'));
-            }
-        } else {
-            abort(404, trans('backpack::backup.only_local_downloads_supported'));
-        }
-    }
+			if ($disk->exists($file_name)) {
+				return response()->download($storage_path.$file_name);
+			}
+			else
+			{
+				abort(404, trans('backpack::backup.backup_doesnt_exist'));
+			}
+		}
+		else
+		{
+			abort(404, trans('backpack::backup.only_local_downloads_supported'));
+		}
+	}
 
-    /**
-     * Deletes a backup file.
-     */
-    public function delete($file_name)
-    {
-        $disk = Storage::disk(\Request::input('disk'));
+	/**
+	 * Deletes a backup file.
+	 */
+	public function delete($file_name)
+	{
+		$disk = Storage::disk(\Request::input('disk'));
 
-        if ($disk->exists($file_name)) {
-            $disk->delete($file_name);
+		if ($disk->exists($file_name)) {
+			$disk->delete($file_name);
 
-            return 'success';
-        } else {
-            abort(404, trans('backpack::backup.backup_doesnt_exist'));
-        }
-    }
+			return 'success';
+		}
+		else
+		{
+			abort(404, trans('backpack::backup.backup_doesnt_exist'));
+		}
+	}
 }
