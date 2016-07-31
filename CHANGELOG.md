@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## 1.1.9 - 2016-07-30
+
+### Added
+- Bogus unit tests. At least we'be able to use travis-ci for requirements errors, until full unit tests are done.
+
+
 ## 1.1.8 - 2016-07-25
 
 ### Fixed
