@@ -20,6 +20,13 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+
+## 1.1.10 - 2016-08-17
+
+### Added
+- Spanish translation, thanks to [Rafael Ernesto Ferro González](https://github.com/rafix);
+
+
 ## 1.1.9 - 2016-07-30
 
 ### Added
