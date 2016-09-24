@@ -10,7 +10,7 @@
 
 An admin interface for managing backups (download and delete). Used in the Backpack package, on Laravel 5.2+
 
-**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.** 
+**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.**
 
 ![Backpack\BackupManager screenshot](https://infinit.io/_/cU2PtmD.png)
 
@@ -25,7 +25,7 @@ $ composer require backpack/backupmanager
 
 2) Then add the service providers to your config/app.php file:
 
-``` 
+```
 'Spatie\Backup\BackupServiceProvider',
 'Backpack\BackupManager\BackupManagerServiceProvider',
 ```
@@ -50,7 +50,7 @@ This is where you choose a different driver if you want your backups to be store
 5) [optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
-<li><a href="{{ url('admin/backup') }}"><i class="fa fa-hdd-o"></i> <span>Backups</span></a></li>
+<li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup') }}"><i class="fa fa-hdd-o"></i> <span>Backups</span></a></li>
 ```
 
 6) [optional] Modify your backup options in config/laravel-backup.php
@@ -69,7 +69,7 @@ protected function schedule(Schedule $schedule)
 
 8) Check that it works
 
-If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location. 
+If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location.
 
 You can do that in your config/database.php file, where you define your database credentials, by adding the _dump_command_path_ variable. Example for Mac OS X's MAMP:
 
