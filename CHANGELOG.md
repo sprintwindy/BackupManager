@@ -20,6 +20,11 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.1.11] - 2016-09-24
+
+### Fixed
+- Routes now follow base prefix - thanks to [Twaambo Haamucenje](https://github.com/twoSeats);
+
 
 ## 1.1.10 - 2016-08-17
 
