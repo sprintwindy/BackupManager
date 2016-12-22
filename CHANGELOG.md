@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.1.12] - 2016-12-13
+
+### Added
+- Greek translation file, thanks to [Stamatis Katsaounis](https://github.com/skatsaounis);
+
+
 ## [1.1.11] - 2016-09-24
 
 ### Fixed
