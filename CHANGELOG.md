@@ -20,6 +20,13 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.1.15] - 2017-01-21
+
+### Added
+- Ability to publish views;
+- Ability to overwrite views the same way you overwrite views in CRUD;
+
+
 ## [1.1.14] - 2017-01-08
 
 ### Fixed

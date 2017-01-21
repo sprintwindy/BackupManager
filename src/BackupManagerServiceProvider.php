@@ -26,13 +26,18 @@ class BackupManagerServiceProvider extends ServiceProvider
             __DIR__.'/config/laravel-backup.php', 'backpack.backupmanager'
         );
 
-        // use this if your package has views
+        // LOAD THE VIEWS
+        // - first the published/overwritten views (in case they have any changes)
+        $this->loadViewsFrom(resource_path('views/vendor/backpack/backupmanager'), 'backupmanager');
+        // - then the stock views that come with the package, in case a published view might be missing
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
         // publish config file
         $this->publishes([__DIR__.'/config/laravel-backup.php' => config_path('laravel-backup.php')], 'config');
         // publish lang files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
+        // publish the views
+        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/backpack/backupmanager')], 'views');
     }
 
     /**
