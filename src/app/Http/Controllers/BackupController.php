@@ -2,9 +2,13 @@
 
 namespace Backpack\BackupManager\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Routing\Controller;
 use Artisan;
+use League\Flysystem\Adapter\Local;
 use Log;
+use Request;
+use Response;
 use Storage;
 
 class BackupController extends Controller
@@ -32,7 +36,7 @@ class BackupController extends Controller
                         'file_size'     => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
                         'disk'          => $disk_name,
-                        'download'      => ($adapter instanceof \League\Flysystem\Adapter\Local) ? true : false,
+                        'download'      => ($adapter instanceof Local) ? true : false,
                         ];
                 }
             }
@@ -69,11 +73,11 @@ class BackupController extends Controller
      */
     public function download()
     {
-        $disk = Storage::disk(\Request::input('disk'));
-        $file_name = \Request::input('file_name');
+        $disk = Storage::disk(Request::input('disk'));
+        $file_name = Request::input('file_name');
         $adapter = $disk->getDriver()->getAdapter();
 
-        if ($adapter instanceof \League\Flysystem\Adapter\Local) {
+        if ($adapter instanceof Local) {
             $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
             if ($disk->exists($file_name)) {
@@ -91,7 +95,7 @@ class BackupController extends Controller
      */
     public function delete($file_name)
     {
-        $disk = Storage::disk(\Request::input('disk'));
+        $disk = Storage::disk(Request::input('disk'));
 
         if ($disk->exists($file_name)) {
             $disk->delete($file_name);
