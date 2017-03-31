@@ -61,19 +61,11 @@ class BackupManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerBackupManager();
         $this->setupRoutes($this->app->router);
 
         // use this if your package has a config file
         config([
                 'config/laravel-backup.php',
         ]);
-    }
-
-    private function registerBackupManager()
-    {
-        $this->app->bind('backupmanager', function ($app) {
-            return new BackupManager($app);
-        });
     }
 }
