@@ -22,7 +22,7 @@ return [
     'delete'                             => 'Delete',
     'delete_confirm'                     => 'Are your sure you want to delete this backup file?',
     'delete_confirmation_title'          => 'Done',
-    'delete_confirmation_message'        => 'The backup was file deleted.',
+    'delete_confirmation_message'        => 'The backup file was deleted.',
     'delete_error_title'                 => 'Error',
     'delete_error_message'               => 'The backup file has NOT been deleted.',
     'delete_cancel_title'                => "It's ok",
