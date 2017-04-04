@@ -27,8 +27,8 @@ $ composer require backpack/backupmanager
 2) Then add the service providers to your config/app.php file:
 
 ```
-'Spatie\Backup\BackupServiceProvider',
-'Backpack\BackupManager\BackupManagerServiceProvider',
+Spatie\Backup\BackupServiceProvider::class,
+Backpack\BackupManager\BackupManagerServiceProvider::class,
 ```
 
 3) Publish the config file and lang files:
