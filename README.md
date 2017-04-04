@@ -13,7 +13,7 @@ An admin interface for managing backups (download and delete). Used in the Backp
 
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://eepurl.com/bUEGjf)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
-![Backpack\BackupManager screenshot](https://infinit.io/_/cU2PtmD.png)
+![Backpack\BackupManager screenshot](https://backpackforlaravel.com/uploads/screenshots/backups_running.png)
 
 
 ## Install
