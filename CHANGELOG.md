@@ -20,6 +20,13 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+
+## [1.1.16] - 2017-xx-xx
+
+### Added
+- French translation;
+
+
 ## [1.1.15] - 2017-01-21
 
 ### Added
