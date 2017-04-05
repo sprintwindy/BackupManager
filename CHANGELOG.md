@@ -21,11 +21,12 @@ All Notable changes to `backupmanager` will be documented in this file
 
 
 
-## [1.1.16] - 2017-xx-xx
+## [1.1.16] - 2017-04-05
 
 ### Added
 - French translation;
-
+- Dutch translation (thanks to [Mark van Beek](https://github.com/chancezeus));
+- fixed App namespace issue;
 
 ## [1.1.15] - 2017-01-21
 
