@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'        => 'Het backup bestand is verwijderd.',
     'delete_error_title'                 => 'Fout',
     'delete_error_message'               => 'Het backup bestand is NIET verwijderd.',
-    'delete_cancel_title'                => "Alles veilig",
+    'delete_cancel_title'                => 'Alles veilig',
     'delete_cancel_message'              => 'Het backup bestand is NIET verwijderd.',
     'create_confirmation_title'          => 'Backup voltooid',
     'create_confirmation_message'        => 'De pagina wordt opnieuw geladen in 3 seconden.',
@@ -35,6 +35,6 @@ return [
     'create_warning_message'             => 'Het kan zijn dat je backup niet gemaakt is. Controleer de log bestanden voor meer informatie.',
     'location'                           => 'Locatie',
     'no_disks_configured'                => 'Geen backup locaties geconfigureerd in config/laravel-backup.php',
-    'backup_doesnt_exist'                => "Het backup bestand bestaat niet.",
+    'backup_doesnt_exist'                => 'Het backup bestand bestaat niet.',
     'only_local_downloads_supported'     => 'Enkel downloads van het lokale bestandssysteem worden ondersteund.',
 ];
