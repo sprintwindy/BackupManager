@@ -30,7 +30,7 @@ return [
     'create_confirmation_title'          => 'Backup completed',
     'create_confirmation_message'        => 'Reloading the page in 3 seconds.',
     'create_error_title'                 => 'Backup error',
-    'create_error_message'               => 'The backup was file could NOT be created.',
+    'create_error_message'               => 'The backup file could NOT be created.',
     'create_warning_title'               => 'Unknown error',
     'create_warning_message'             => 'Your backup may NOT have been created. Please check log files for details.',
     'location'                           => 'Location',
