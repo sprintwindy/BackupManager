@@ -15,6 +15,13 @@ class BackupManagerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Where the route file lives, both inside the package and in the app (if overwritten).
+     *
+     * @var bool
+     */
+    public $routeFilePath = '/routes/backpack/backupmanager.php';
+
+    /**
      * Perform post-registration booting of services.
      *
      * @return void
@@ -43,15 +50,20 @@ class BackupManagerServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
+     * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\BackupManager\app\Http\Controllers'], function ($router) {
-            require __DIR__.'/app/Http/routes.php';
-        });
+        // by default, use the routes file provided in vendor
+        $routeFilePathInUse = __DIR__.$this->routeFilePath;
+
+        // but if there's a file with the same name in routes/backpack, use that one
+        if (file_exists(base_path().$this->routeFilePath)) {
+            $routeFilePathInUse = base_path().$this->routeFilePath;
+        }
+
+        $this->loadRoutesFrom($routeFilePathInUse);
     }
 
     /**
