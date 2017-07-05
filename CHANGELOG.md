@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.1.17] - 2017-07-05
+
+### Added
+- Portugese translation (thanks to [Toni Almeida](https://github.com/promatik));
+- Portugese (Brasilian) translation (thanks to [Guilherme Augusto Henschel](https://github.com/cenoura));
+
 
 ## [1.1.16] - 2017-04-05
 
