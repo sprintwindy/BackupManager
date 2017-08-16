@@ -53,14 +53,14 @@ class BackupController extends Controller
     {
         try {
             ini_set('max_execution_time', 300);
-          // start the backup process
-          Artisan::call('backup:run');
+            // start the backup process
+            Artisan::call('backup:run');
             $output = Artisan::output();
 
-          // log the results
-          Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n".$output);
-          // return the results as a response to the ajax call
-          echo $output;
+            // log the results
+            Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n".$output);
+            // return the results as a response to the ajax call
+            echo $output;
         } catch (Exception $e) {
             Response::make($e->getMessage(), 500);
         }
