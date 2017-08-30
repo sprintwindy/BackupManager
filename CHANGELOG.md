@@ -25,6 +25,9 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Fixed
 - upgraded to Spatie/Backup v4; breaking change: dump variables are now named inside an array in config/database.php;
 
+### Added
+- package auto-discovery;
+
 
 ## [1.1.18] - 2017-07-06
 
