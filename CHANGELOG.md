@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.2.0] - 2017-08-30
+
+### Fixed
+- upgraded to Spatie/Backup v4; breaking change: dump variables are now named inside an array in config/database.php;
+
+
 ## [1.1.18] - 2017-07-06
 
 ### Added
