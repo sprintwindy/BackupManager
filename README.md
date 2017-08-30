@@ -103,6 +103,11 @@ Point and click, baby. Point and click.
 Try at **your-project-domain/admin/backup**
 
 
+## Upgrading from 1.1.x to 1.2.x
+
+The only breaking change is that the ```config/database.php``` dump variables are now inside an array. Please see the step 8 above, copy-paste the ```dump``` array from there and customize.
+
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
