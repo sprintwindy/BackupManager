@@ -54,7 +54,7 @@ This is where you choose a different driver if you want your backups to be store
 <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup') }}"><i class="fa fa-hdd-o"></i> <span>Backups</span></a></li>
 ```
 
-6) [optional] Modify your backup options in config/laravel-backup.php
+6) [optional] Modify your backup options in config/backup.php
 
 7) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 

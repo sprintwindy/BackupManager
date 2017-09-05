@@ -30,7 +30,7 @@ class BackupManagerServiceProvider extends ServiceProvider
     {
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
-            __DIR__.'/config/laravel-backup.php', 'backpack.backupmanager'
+            __DIR__.'/config/backup.php', 'backpack.backupmanager'
         );
 
         // LOAD THE VIEWS
@@ -40,7 +40,7 @@ class BackupManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
         // publish config file
-        $this->publishes([__DIR__.'/config/laravel-backup.php' => config_path('laravel-backup.php')], 'config');
+        $this->publishes([__DIR__.'/config/backup.php' => config_path('backup.php')], 'config');
         // publish lang files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
         // publish the views
@@ -78,7 +78,7 @@ class BackupManagerServiceProvider extends ServiceProvider
 
         // use this if your package has a config file
         config([
-                'config/laravel-backup.php',
+                'config/backup.php',
         ]);
     }
 }

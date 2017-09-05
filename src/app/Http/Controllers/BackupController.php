@@ -15,13 +15,13 @@ class BackupController extends Controller
 {
     public function index()
     {
-        if (!count(config('laravel-backup.backup.destination.disks'))) {
+        if (!count(config('backup.backup.destination.disks'))) {
             dd(trans('backpack::backup.no_disks_configured'));
         }
 
         $this->data['backups'] = [];
 
-        foreach (config('laravel-backup.backup.destination.disks') as $disk_name) {
+        foreach (config('backup.backup.destination.disks') as $disk_name) {
             $disk = Storage::disk($disk_name);
             $adapter = $disk->getDriver()->getAdapter();
             $files = $disk->allFiles();

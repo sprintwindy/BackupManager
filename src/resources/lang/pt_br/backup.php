@@ -34,7 +34,7 @@ return [
     'create_warning_title'               => 'Erro desconhecido',
     'create_warning_message'             => 'O backup solicitado pode não ter sido criado. Por favor, verifique o arquivo de log para mais informações.',
     'location'                           => 'Localização',
-    'no_disks_configured'                => 'Não existe configuração de local de backup no arquivo config/laravel-backup.php',
+    'no_disks_configured'                => 'Não existe configuração de local de backup no arquivo config/backup.php',
     'backup_doesnt_exist'                => 'O arquivo de backup não existe.',
     'only_local_downloads_supported'     => 'Somente são suportados downloads do sistema de arquivos local.',
 ];

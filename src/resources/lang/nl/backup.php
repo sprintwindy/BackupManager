@@ -34,7 +34,7 @@ return [
     'create_warning_title'               => 'Onbekende fout',
     'create_warning_message'             => 'Het kan zijn dat je backup niet gemaakt is. Controleer de log bestanden voor meer informatie.',
     'location'                           => 'Locatie',
-    'no_disks_configured'                => 'Geen backup locaties geconfigureerd in config/laravel-backup.php',
+    'no_disks_configured'                => 'Geen backup locaties geconfigureerd in config/backup.php',
     'backup_doesnt_exist'                => 'Het backup bestand bestaat niet.',
     'only_local_downloads_supported'     => 'Enkel downloads van het lokale bestandssysteem worden ondersteund.',
 ];

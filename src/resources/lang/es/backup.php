@@ -34,7 +34,7 @@ return [
     'create_warning_title'               => 'Estamos presentando problemas',
     'create_warning_message'             => 'La copia de seguridad puede que no se haya realizado. Por favor verifica los logs para más detalles.',
     'location'                           => 'Ubicación',
-    'no_disks_configured'                => 'No existe ningún disco configurado config/laravel-backup.php',
+    'no_disks_configured'                => 'No existe ningún disco configurado config/backup.php',
     'backup_doesnt_exist'                => 'La copia de seguridad no existe.',
     'only_local_downloads_supported'     => 'Solo se permiten descargas del sistema de archivos local.',
 ];

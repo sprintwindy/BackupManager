@@ -34,7 +34,7 @@ return [
     'create_warning_title'               => 'Erreur inconnue',
     'create_warning_message'             => 'Votre fichier de sauvegarde n\'a sans doute pas pu être créé. Regardez les logs pour plus de details.',
     'location'                           => 'Emplacement',
-    'no_disks_configured'                => 'Aucun "backup disks" de configuré dans config/laravel-backup.php',
+    'no_disks_configured'                => 'Aucun "backup disks" de configuré dans config/backup.php',
     'backup_doesnt_exist'                => "Le fichier de sauvegarde n'existe pas.",
     'only_local_downloads_supported'     => 'Seuls les téléchargments à partir du système de fichier local sont supportés.',
 ];
