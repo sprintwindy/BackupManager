@@ -107,7 +107,20 @@ Try at **your-project-domain/admin/backup**
 ## Upgrading from 1.2.x to 1.3.x
 
 1) change your required version to ```"backpack/backupmanager": "^1.3",``` and run ```composer update```;
-2) rename your ```config/laravel-backup.php``` file to ```config/backup.php```;
+2) delete the old config file (too many changes, including namechange): ```rm config/laravel-backup.php```
+3) republish the config files: ```php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"```
+4) change your db configuration in ```config/database.php``` to use the new dump configuration (all options in one array; the example below is for MAMP on MacOS):
+
+```
+            'dump' => [
+               'dump_binary_path' => '/Applications/MAMP/Library/bin/', // only the path, so without `mysqldump` or `pg_dump`
+               'use_single_transaction',
+               'timeout' => 60 * 5, // 5 minute timeout
+               // 'exclude_tables' => ['table1', 'table2'],
+               // 'add_extra_option' => '--optionname=optionvalue',
+            ]
+```
+5) Create a backup in the interface to test it works. If it doesn't try ```php artisan backup:run``` to see what the problem is.
 
 
 ## Upgrading from 1.1.x to 1.2.x

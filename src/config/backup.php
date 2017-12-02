@@ -118,9 +118,9 @@ return [
      */
     'monitorBackups' => [
         [
-            'name' => env('APP_NAME'),
-            'disks' => ['backup'],
-            'newestBackupsShouldNotBeOlderThanDays' => 1,
+            'name'                                   => env('APP_NAME'),
+            'disks'                                  => ['backup'],
+            'newestBackupsShouldNotBeOlderThanDays'  => 1,
             'storageUsedMayNotBeHigherThanMegabytes' => 5000,
         ],
 
