@@ -103,6 +103,13 @@ Point and click, baby. Point and click.
 Try at **your-project-domain/admin/backup**
 
 
+
+## Upgrading from 1.2.x to 1.3.x
+
+1) change your required version to ```"backpack/backupmanager": "^1.3",``` and run ```composer update```;
+2) rename your ```config/laravel-backup.php``` file to ```config/backup.php```;
+
+
 ## Upgrading from 1.1.x to 1.2.x
 
 1) change your required version to ```"backpack/backupmanager": "^1.2",```;
