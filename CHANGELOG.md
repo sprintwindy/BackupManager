@@ -19,6 +19,13 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+
+## [1.3.2] - 2017-12-02
+
+### Added
+- Turkish translation (thanks to [Yusuf Kaya](https://github.com/yusufkaya0));
+
+
 ## [1.3.1] - 2017-12-02
 
 ### Fixed
