@@ -19,6 +19,17 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+## [1.3.1] - 2017-12-02
+
+### Fixed
+- working default configuration file for the new spatie/backup;
+
+
+## [1.3.0] - 2017-12-02
+
+### Fixed
+- upgraded to Spatie/Backup v5; breaking change: config file is now named ```config/backup.php```;
+
 
 ## [1.2.0] - 2017-08-30
 
