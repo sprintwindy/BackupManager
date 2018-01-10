@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'    => '此備份已刪除',
     'delete_error_title'             => '錯誤',
     'delete_error_message'           => '此備份未被刪除',
-    'delete_cancel_title'            => "沒問題",
+    'delete_cancel_title'            => '沒問題',
     'delete_cancel_message'          => '此備份未被刪除',
     'create_confirmation_title'      => '備份完畢',
     'create_confirmation_message'    => '此頁面 3 秒後重新整理',
@@ -35,6 +35,6 @@ return [
     'create_warning_message'         => '你的備份不允許建立，更多細節請查看 log 檔案',
     'location'                       => '所在位置',
     'no_disks_configured'            => '在 config/laravel-backup.php 沒有備份 disks 設定',
-    'backup_doesnt_exist'            => "此備份檔案不存在",
+    'backup_doesnt_exist'            => '此備份檔案不存在',
     'only_local_downloads_supported' => '僅支援本地檔案系統才可以下載',
 ];
