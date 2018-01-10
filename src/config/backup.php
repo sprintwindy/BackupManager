@@ -4,6 +4,19 @@ return [
 
     'backup' => [
 
+        /**
+         * Custom your backup routes.
+         */
+        'setup_backup_routes' => true,
+
+        /**
+         * https://docs.spatie.be/laravel-backup/v4/taking-backups/overview
+         * --only-to-disk=name-of-your-disk
+         * --only-db
+         * --only-files
+         */
+        'options' => null,
+
         /*
          * The name of this application. You can use this name to monitor
          * the backups.
