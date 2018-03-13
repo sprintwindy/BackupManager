@@ -8,7 +8,7 @@
 [![Style CI](https://styleci.io/repos/53956594/shield)](https://styleci.io/repos/53956594)
 [![Total Downloads](https://img.shields.io/packagist/dt/backpack/backupmanager.svg?style=flat-square)](https://packagist.org/packages/backpack/backupmanager)
 
-An admin interface for managing backups (download and delete). Used in the Backpack package, on Laravel 5.2+
+An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel-backup). Allows the admin to easily manage backups (download and delete). Used in the Backpack package, on Laravel 5.2+
 
 
 > ### Security updates and breaking changes
