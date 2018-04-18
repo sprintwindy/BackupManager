@@ -54,8 +54,14 @@ class BackupController extends Controller
         try {
             ini_set('max_execution_time', 300);
             // start the backup process
-            ($options = config('backpack.backup.options')) ? [$options => true] : [];
-            Artisan::call('backup:run', $options);
+            $flags = config('backup.backup.backpack_flags', false);
+
+            if ($flags) {
+                Artisan::call('backup:run', $flags);
+            } else {
+                Artisan::call('backup:run');
+            }
+
             $output = Artisan::output();
 
             // log the results

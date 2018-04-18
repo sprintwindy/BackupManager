@@ -4,18 +4,19 @@ return [
 
     'backup' => [
 
-        /*
-         * Custom your backup routes.
-         */
-        'setup_backup_routes' => true,
-
-        /*
+        /* --------------------------------------
+         * Backpack\BackupManager Command Flags
+         * --------------------------------------
+         * These flags will be attached every time a backup is triggered
+         * by Backpack\BackupManager. By default only notifications are disabled.
+         *
          * https://docs.spatie.be/laravel-backup/v4/taking-backups/overview
          * --only-to-disk=name-of-your-disk
          * --only-db
          * --only-files
+         * --disable-notifications
          */
-        'options' => null,
+        'backpack_flags' => ["--disable-notifications"],
 
         /*
          * The name of this application. You can use this name to monitor

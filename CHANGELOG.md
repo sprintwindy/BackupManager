@@ -19,6 +19,15 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+## [1.4.0] - 2018-04-23
+
+### Added
+- Backpack\Base 0.9.x requirement;
+
+### Removed
+- support for Backpack\Base pre-0.9.0;
+- notifications from being triggered, when the Create Backup button is pressed; new config option ```backpack_flags``` can overwrite this behaviour;
+
 
 ## [1.3.2] - 2017-12-02
 
