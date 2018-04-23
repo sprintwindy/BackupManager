@@ -21,23 +21,17 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 1) In your terminal
 
 ``` bash
-$ composer require backpack/backupmanager
-```
+# Install the package
+composer require backpack/backupmanager
 
-2) For Laravel <5.5, add the service providers to your config/app.php file:
-
-```
-Spatie\Backup\BackupServiceProvider::class,
-Backpack\BackupManager\BackupManagerServiceProvider::class,
-```
-
-3) Publish the config file and lang files:
-
-```
+# Publish the config file and lang files:
 php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"
+
+# [optional] Add a sidebar_content item for it
+php artisan backpack:base:add-sidebar-content "<li><a href='{{ url(config('backpack.base.route_prefix', 'admin').'/backup') }}'><i class='fa fa-hdd-o'></i> <span>Backups</span></a></li>"
 ```
 
-4) Add a new "disk" to config/filesystems.php:
+2) Add a new "disk" to config/filesystems.php:
 
 ```php
         // used for Backpack/BackupManager
@@ -48,15 +42,9 @@ php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServi
 ```
 This is where you choose a different driver if you want your backups to be stored somewhere else (S3, Dropbox, Google Drive, Box, etc).
 
-5) [optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+3) [optional] Modify your backup options in ```config/backup.php```, then run ```php artisan backup:run``` to make sure it's still working.
 
-```html
-<li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup') }}"><i class="fa fa-hdd-o"></i> <span>Backups</span></a></li>
-```
-
-6) [optional] Modify your backup options in ```config/backup.php```, then run ```php artisan backup:run``` to make sure it's still working.
-
-7) [optional] Instruct Laravel to run the backups automatically in your console kernel:
+4) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 
 ```php
 // app/Console/Kernel.php
@@ -68,7 +56,7 @@ protected function schedule(Schedule $schedule)
 }
 ```
 
-8) Check that it works
+5) Check that it works
 
 If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location.
 
