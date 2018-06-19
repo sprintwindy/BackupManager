@@ -25,7 +25,7 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 composer require backpack/backupmanager
 
 # Publish the config file and lang files:
-php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"
+php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"  --tag=config
 
 # [optional] Add a sidebar_content item for it
 php artisan backpack:base:add-sidebar-content "<li><a href='{{ url(config('backpack.base.route_prefix', 'admin').'/backup') }}'><i class='fa fa-hdd-o'></i> <span>Backups</span></a></li>"
