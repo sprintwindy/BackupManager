@@ -17,7 +17,7 @@ return [
          * --disable-notifications
          */
         'backpack_flags' => [
-            '--disable-notifications'=>true
+            '--disable-notifications'=> true,
         ],
 
         /*
