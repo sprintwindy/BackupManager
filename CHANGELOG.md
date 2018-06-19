@@ -19,6 +19,14 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+
+## [1.4.1] - 2018-06-19
+
+### Fixed
+- config file has ```backpack_flags``` as array;
+- config file has a ```temporary_directory``` defined;
+
+
 ## [1.4.0] - 2018-04-23
 
 ### Added
