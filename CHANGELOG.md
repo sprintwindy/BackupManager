@@ -20,7 +20,7 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
-## [1.4.1] - 2018-06-19
+## [1.4.2] - 2018-06-19
 
 ### Fixed
 - config file has ```backpack_flags``` as array;
