@@ -37,8 +37,7 @@ class BackupManagerServiceProvider extends ServiceProvider
         // - first the published/overwritten views (in case they have any changes)
         $customViewsFolder = resource_path('views/vendor/backpack/backupmanager');
 
-        if (file_exists($customViewsFolder))
-        {
+        if (file_exists($customViewsFolder)) {
             $this->loadViewsFrom($customViewsFolder, 'backupmanager');
         }
         // - then the stock views that come with the package, in case a published view might be missing
