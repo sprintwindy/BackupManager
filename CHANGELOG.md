@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.4.3] - 2018-10-15
+
+### Fixed
+- custom views folder is only loaded when it exists; this fixes the conflicts in the ```php artisan view:cache``` command;
+
+
 ## [1.4.2] - 2018-06-19
 
 ### Fixed
