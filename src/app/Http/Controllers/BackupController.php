@@ -52,7 +52,7 @@ class BackupController extends Controller
     public function create()
     {
         try {
-            ini_set('max_execution_time', 300);
+            ini_set('max_execution_time', 600);
             // start the backup process
             $flags = config('backup.backup.backpack_flags', false);
             info('Calling backup:run ', $flags);

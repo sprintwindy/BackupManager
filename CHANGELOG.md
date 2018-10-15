@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.4.4] - 2018-10-15
+
+### Fixed
+- monitored backups now has the correct disk name;
+
+
 ## [1.4.3] - 2018-10-15
 
 ### Fixed
