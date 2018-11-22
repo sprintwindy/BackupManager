@@ -22,7 +22,7 @@
     ],
     "require": {
         "illuminate/support": "~5.1",
-        "backpack/base": "^0.9",
+        "backpack/base": "0.9.*|1.0.*",
         "spatie/laravel-backup": "^5.0"
     },
     "require-dev": {

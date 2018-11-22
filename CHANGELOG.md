@@ -19,6 +19,9 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+## [1.4.5] - 2018-11-22
+
+- added support for Base 1.0.x
 
 ## [1.4.4] - 2018-10-15
 
