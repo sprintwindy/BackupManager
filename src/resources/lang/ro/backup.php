@@ -34,7 +34,7 @@ return [
     'create_warning_title'           => 'Eroare necunoscută',
     'create_warning_message'         => 'Copia de siguranță e posibil să NU fi fost creată. Verificați fișierele de log pentru detalii.',
     'location'                       => 'Locație',
-    'no_disks_configured'            => 'Nu există niciun disc in config/laravel-backups.php',
+    'no_disks_configured'            => 'Nu există niciun disc in config/backups.php',
     'backup_doesnt_exist'            => 'Fișierul de backup nu există.',
     'only_local_downloads_supported' => 'Doar descarcările din sistemul de fișiere local sunt suportate.',
 ];
