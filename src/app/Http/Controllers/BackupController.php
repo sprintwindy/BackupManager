@@ -11,7 +11,6 @@ use Request;
 use Response;
 use Storage;
 use Symfony\Component\Process\Process as Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BackupController extends Controller
 {
