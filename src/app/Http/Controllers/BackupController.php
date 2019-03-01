@@ -10,6 +10,8 @@ use Log;
 use Request;
 use Response;
 use Storage;
+use Symfony\Component\Process\Process as Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BackupController extends Controller
 {
@@ -53,22 +55,13 @@ class BackupController extends Controller
     {
         try {
             ini_set('max_execution_time', 600);
-            // start the backup process
-            $flags = config('backup.backup.backpack_flags', false);
-            info('Calling backup:run ', $flags);
 
-            if ($flags) {
-                Artisan::call('backup:run', $flags);
-            } else {
-                Artisan::call('backup:run');
-            }
+            Log::info('Backpack\BackupManager -- Called backup:run from admin interface');
 
-            $output = Artisan::output();
+            $process = new Process('php artisan backup:run');
+            $process->start();
 
-            // log the results
-            Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n".$output);
-            // return the results as a response to the ajax call
-            echo $output;
+            Log::info("Backpack\BackupManager -- backup process has started");
         } catch (Exception $e) {
             Response::make($e->getMessage(), 500);
         }
