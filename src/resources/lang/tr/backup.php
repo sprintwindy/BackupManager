@@ -34,7 +34,7 @@ return [
     'create_warning_title'           => 'Bilinmeyen hata',
     'create_warning_message'         => 'Yedekleme işlemi oluşturulmamış olabilir. Lütfen log dosyasını inceleyiniz .',
     'location'                       => 'Konum',
-    'no_disks_configured'            => 'Yedekleme disk ismi config/laravel-backup.php dosyasında tanımlanmamış',
+    'no_disks_configured'            => 'Yedekleme disk ismi config/backup.php dosyasında tanımlanmamış',
     'backup_doesnt_exist'            => 'Yedek dosyası mevcut değil.',
     'only_local_downloads_supported' => 'İndirme işlemi sadece local sunucuda bulunan dosyalar için geçerlidir.',
 ];

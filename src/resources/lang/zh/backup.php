@@ -34,7 +34,7 @@ return [
     'create_warning_title'           => '未知錯誤',
     'create_warning_message'         => '你的備份不允許建立，更多細節請查看 log 檔案',
     'location'                       => '所在位置',
-    'no_disks_configured'            => '在 config/laravel-backup.php 沒有備份 disks 設定',
+    'no_disks_configured'            => '在 config/backup.php 沒有備份 disks 設定',
     'backup_doesnt_exist'            => '此備份檔案不存在',
     'only_local_downloads_supported' => '僅支援本地檔案系統才可以下載',
 ];
