@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'    => 'تم حذف ملف النسخة الاحتياطية',
     'delete_error_title'             => 'هناك خطأ',
     'delete_error_message'           => 'ملف النسخة الاحتياطية لم يتم حذفه.',
-    'delete_cancel_title'            => "كل شيئ على مايرام.",
+    'delete_cancel_title'            => 'كل شيئ على مايرام.',
     'delete_cancel_message'          => 'ملف النسخة الاحتياطية لم يتم حذفه.',
     'create_confirmation_title'      => 'تم عمل النسخ الاحتياطية بالنجاح',
     'create_confirmation_message'    => 'سيتم اعادة اعادة تحميل الصفحة خلال 3 ثواني.',
@@ -35,6 +35,6 @@ return [
     'create_warning_message'         => 'ربما لم يتم إنشاء النسخة الاحتياطية. يرجى التحقق من ملفات السجل للحصول على التفاصيل.',
     'location'                       => 'الموقع',
     'no_disks_configured'            => 'لايوجد أقراص تم تحددها في ملف config/backup.php',
-    'backup_doesnt_exist'            => "ملف النسخ الاحتياطي غير موجود.",
+    'backup_doesnt_exist'            => 'ملف النسخ الاحتياطي غير موجود.',
     'only_local_downloads_supported' => 'لايمكن تحميل النسخة الاحتياطية الا من القرص المحلي.',
 ];
