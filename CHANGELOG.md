@@ -19,6 +19,10 @@ All Notable changes to `backupmanager` will be documented in this file
 ### Security
 - Nothing
 
+## [1.4.7] - 2019-03-01
+
+- better messages
+
 ## [1.4.6] - 2019-03-01
 
 - added support for Base 1.1 and Laravel 5.8;

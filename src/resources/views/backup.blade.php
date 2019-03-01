@@ -75,9 +75,9 @@
         l.start();
 
         // Will display a progress bar for 10% of the button width
-        l.setProgress( 0.3 );
+        l.setProgress( 0.1 );
 
-        setTimeout(function(){ l.setProgress( 0.6 ); }, 2000);
+        setTimeout(function(){ l.setProgress( 0.3 ); }, 2000);
 
         // do the backup through ajax
         $.ajax({
