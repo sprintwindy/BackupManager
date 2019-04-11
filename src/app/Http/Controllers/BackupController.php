@@ -10,7 +10,6 @@ use Log;
 use Request;
 use Response;
 use Storage;
-use Symfony\Component\Process\Process as Process;
 
 class BackupController extends Controller
 {
@@ -57,8 +56,7 @@ class BackupController extends Controller
 
             Log::info('Backpack\BackupManager -- Called backup:run from admin interface');
 
-            $process = new Process('php artisan backup:run');
-            $process->start();
+            Artisan::call('backup:run');
 
             Log::info("Backpack\BackupManager -- backup process has started");
         } catch (Exception $e) {
