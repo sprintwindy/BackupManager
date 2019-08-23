@@ -1,29 +1,32 @@
-@extends('backpack::layout')
+@extends('backpack::layouts.top_left')
 
 @section('after_styles')
     <!-- Ladda Buttons (loading buttons) -->
     <link href="{{ asset('vendor/backpack/ladda/ladda-themeless.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
+
+@php
+  $breadcrumbs = [
+    trans('backpack::crud.admin') => backpack_url('dashboard'),
+    trans('backpack::backup.backup') => false,
+  ];
+@endphp
+
 @section('header')
-	<section class="content-header">
-	  <h1>
-	    {{ trans('backpack::backup.backup') }}
-	  </h1>
-	  <ol class="breadcrumb">
-	    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">Admin</a></li>
-	    <li class="active">{{ trans('backpack::backup.backup') }}</li>
-	  </ol>
-	</section>
+    <section class="container-fluid">
+      <h2>
+        <span class="text-capitalize">{{ trans('backpack::backup.backup') }}</span>
+      </h2>
+    </section>
 @endsection
 
 @section('content')
 <!-- Default box -->
-  <div class="box">
-    <div class="box-body">
-      <button id="create-new-backup-button" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/create') }}" class="btn btn-primary ladda-button" data-style="zoom-in"><span class="ladda-label"><i class="fa fa-plus"></i> {{ trans('backpack::backup.create_a_new_backup') }}</span></button>
-      <br>
-      <table class="table table-hover table-condensed">
+  <button id="create-new-backup-button" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/create') }}" class="btn btn-primary ladda-button mb-2" data-style="zoom-in"><span class="ladda-label"><i class="fa fa-plus"></i> {{ trans('backpack::backup.create_a_new_backup') }}</span></button>
+  <div class="card">
+    <div class="card-body p-0">
+      <table class="table table-hover pb-0 mb-0">
         <thead>
           <tr>
             <th>#</th>
@@ -42,9 +45,9 @@
             <td class="text-right">{{ round((int)$b['file_size']/1048576, 2).' MB' }}</td>
             <td class="text-right">
                 @if ($b['download'])
-                <a class="btn btn-xs btn-default" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/download/') }}?disk={{ $b['disk'] }}&path={{ urlencode($b['file_path']) }}&file_name={{ urlencode($b['file_name']) }}"><i class="fa fa-cloud-download"></i> {{ trans('backpack::backup.download') }}</a>
+                <a class="btn btn-sm btn-secondary" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/download/') }}?disk={{ $b['disk'] }}&path={{ urlencode($b['file_path']) }}&file_name={{ urlencode($b['file_name']) }}"><i class="fa fa-cloud-download"></i> {{ trans('backpack::backup.download') }}</a>
                 @endif
-                <a class="btn btn-xs btn-danger" data-button-type="delete" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/delete/'.$b['file_name']) }}?disk={{ $b['disk'] }}"><i class="fa fa-trash-o"></i> {{ trans('backpack::backup.delete') }}</a>
+                <a class="btn btn-sm btn-danger" data-button-type="delete" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/delete/'.$b['file_name']) }}?disk={{ $b['disk'] }}"><i class="fa fa-trash-o"></i> {{ trans('backpack::backup.delete') }}</a>
             </td>
           </tr>
           @endforeach

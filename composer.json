@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "backpack/base": "1.1.*",
+        "backpack/base": "1.1.*|2.*",
         "spatie/laravel-backup": "^6.0"
     },
     "require-dev": {
