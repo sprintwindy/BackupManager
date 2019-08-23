@@ -20,6 +20,12 @@ All Notable changes to `backupmanager` will be documented in this file
 - Nothing
 
 
+## [1.4.9] - 2019-08-23
+
+### Fixed
+- changed config file to fit latest spatie/laravel-backup config file model;
+
+
 ## [1.4.8] - 2019-04-23
 
 ### Fixed
