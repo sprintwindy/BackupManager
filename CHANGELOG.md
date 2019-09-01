@@ -2,25 +2,13 @@
 
 All Notable changes to `backupmanager` will be documented in this file
 
-## NEXT - YYYY-MM-DD
+## [1.4.8] - 2019-04-23
 
 ### Added
-- Nothing
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- #70 - Russian language file;
 
 
-## [1.4.8] - 2019-04-23
+## [1.4.9] - 2019-09-01
 
 ### Fixed
 - merged #65 - using Artisan class instead of manually calling the same command line; this makes the AJAX wait for the answer, so the page reload will happen after the actual backup has been done;
