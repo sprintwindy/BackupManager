@@ -2,13 +2,19 @@
 
 All Notable changes to `backupmanager` will be documented in this file
 
-## [1.4.8] - 2019-04-23
+## [1.4.10] - 2019-09-01
 
 ### Added
 - #70 - Russian language file;
 
 
-## [1.4.9] - 2019-09-01
+## [1.4.9] - 2019-08-23
+
+### Fixed
+- changed config file to fit latest spatie/laravel-backup config file model;
+
+
+## [1.4.8] - 2019-04-23
 
 ### Fixed
 - merged #65 - using Artisan class instead of manually calling the same command line; this makes the AJAX wait for the answer, so the page reload will happen after the actual backup has been done;
