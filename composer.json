@@ -20,6 +20,8 @@
             "role": "Chief Architect & Web Developer"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "backpack/crud": "^4.0",
         "spatie/laravel-backup": "^6.0"
