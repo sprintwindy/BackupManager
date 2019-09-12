@@ -1,11 +1,5 @@
 @extends(backpack_view('layouts.top_left'))
 
-@section('after_styles')
-    <!-- Ladda Buttons (loading buttons) -->
-    <link href="{{ asset('vendor/backpack/ladda/ladda-themeless.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
-
-
 @php
   $breadcrumbs = [
     trans('backpack::crud.admin') => backpack_url('dashboard'),
@@ -60,9 +54,6 @@
 @endsection
 
 @section('after_scripts')
-    <!-- Ladda Buttons (loading buttons) -->
-    <script src="{{ asset('vendor/backpack/ladda/spin.js') }}"></script>
-    <script src="{{ asset('vendor/backpack/ladda/ladda.js') }}"></script>
 
 <script>
   jQuery(document).ready(function($) {
@@ -70,60 +61,37 @@
     // capture the Create new backup button
     $("#create-new-backup-button").click(function(e) {
         e.preventDefault();
+
         var create_backup_url = $(this).attr('href');
-        // Create a new instance of ladda for the specified button
-        var l = Ladda.create( document.querySelector( '#create-new-backup-button' ) );
-
-        // Start loading
-        l.start();
-
-        // Will display a progress bar for 10% of the button width
-        l.setProgress( 0.1 );
-
-        setTimeout(function(){ l.setProgress( 0.3 ); }, 2000);
 
         // do the backup through ajax
         $.ajax({
-                url: create_backup_url,
-                type: 'PUT',
-                success: function(result) {
-                    l.setProgress( 0.9 );
-                    // Show an alert with the result
-                    if (result.indexOf('failed') >= 0) {
-                        new PNotify({
-                            title: "{{ trans('backpack::backup.create_warning_title') }}",
-                            text: "{{ trans('backpack::backup.create_warning_message') }}",
-                            type: "warning"
-                        });
-                    }
-                    else
-                    {
-                        new PNotify({
-                            title: "{{ trans('backpack::backup.create_confirmation_title') }}",
-                            text: "{{ trans('backpack::backup.create_confirmation_message') }}",
-                            type: "success"
-                        });
-                    }
-
-                    // Stop loading
-                    l.setProgress( 1 );
-                    l.stop();
-
-                    // refresh the page to show the new file
-                    setTimeout(function(){ location.reload(); }, 3000);
-                },
-                error: function(result) {
-                    l.setProgress( 0.9 );
-                    // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backpack::backup.create_error_title') }}",
-                        text: "{{ trans('backpack::backup.create_error_message') }}",
+            url: create_backup_url,
+            type: 'PUT',
+            success: function(result) {
+                // Show an alert with the result
+                if (result.indexOf('failed') >= 0) {
+                    new Noty({
+                        text: "<strong>{{ trans('backpack::backup.create_warning_title') }}</strong><br>{{ trans('backpack::backup.create_warning_message') }}",
                         type: "warning"
                     });
-                    // Stop loading
-                    l.stop();
                 }
-            });
+                else
+                {
+                    new Noty({
+                        text: "<strong>{{ trans('backpack::backup.create_confirmation_title') }}</strong><br>{{ trans('backpack::backup.create_confirmation_message') }}",
+                        type: "success"
+                    });
+                }
+            },
+            error: function(result) {
+                // Show an alert with the result
+                new Noty({
+                    text: "<strong>{{ trans('backpack::backup.create_error_title') }}</strong><br>{{ trans('backpack::backup.create_error_message') }}",
+                    type: "warning"
+                });
+            }
+        });
     });
 
     // capture the delete button
@@ -138,9 +106,8 @@
                 type: 'DELETE',
                 success: function(result) {
                     // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backpack::backup.delete_confirmation_title') }}",
-                        text: "{{ trans('backpack::backup.delete_confirmation_message') }}",
+                    new Noty({
+                        text: "<strong>{{ trans('backpack::backup.delete_confirmation_title') }}</strong><br>{{ trans('backpack::backup.delete_confirmation_message') }}",
                         type: "success"
                     });
                     // delete the row from the table
@@ -148,17 +115,15 @@
                 },
                 error: function(result) {
                     // Show an alert with the result
-                    new PNotify({
-                        title: "{{ trans('backpack::backup.delete_error_title') }}",
-                        text: "{{ trans('backpack::backup.delete_error_message') }}",
+                    new Noty({
+                        text: "<strong>{{ trans('backpack::backup.delete_error_title') }}</strong><br>{{ trans('backpack::backup.delete_error_message') }}",
                         type: "warning"
                     });
                 }
             });
         } else {
-            new PNotify({
-                title: "{{ trans('backpack::backup.delete_cancel_title') }}",
-                text: "{{ trans('backpack::backup.delete_cancel_message') }}",
+            new Noty({
+                text: "<strong>{{ trans('backpack::backup.delete_cancel_title') }}</strong><br>{{ trans('backpack::backup.delete_cancel_message') }}",
                 type: "info"
             });
         }
