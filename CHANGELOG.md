@@ -2,6 +2,21 @@
 
 All Notable changes to `backupmanager` will be documented in this file
 
+----------
+
+
+## [2.0.0] - 2019-09-24
+
+### Added
+- support for Backpack v4;
+
+### Removed
+- support for Backpack v3;
+
+
+-----------
+
+
 ## [1.4.10] - 2019-09-01
 
 ### Added
