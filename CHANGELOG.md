@@ -2,22 +2,10 @@
 
 All Notable changes to `backupmanager` will be documented in this file
 
-## NEXT - YYYY-MM-DD
+## [1.4.10] - 2019-09-01
 
 ### Added
-- Nothing
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- #70 - Russian language file;
 
 
 ## [1.4.9] - 2019-08-23
