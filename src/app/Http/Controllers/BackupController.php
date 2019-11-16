@@ -31,13 +31,13 @@ class BackupController extends Controller
                 // only take the zip files into account
                 if (substr($f, -4) == '.zip' && $disk->exists($f)) {
                     $this->data['backups'][] = [
-                        'file_path' => $f,
-                        'file_name' => str_replace('backups/', '', $f),
-                        'file_size' => $disk->size($f),
+                        'file_path'     => $f,
+                        'file_name'     => str_replace('backups/', '', $f),
+                        'file_size'     => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
-                        'disk' => $disk_name,
-                        'download' => ($adapter instanceof Local) ? true : false,
-                    ];
+                        'disk'          => $disk_name,
+                        'download'      => ($adapter instanceof Local) ? true : false,
+                        ];
                 }
             }
         }
@@ -90,7 +90,7 @@ class BackupController extends Controller
             $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
             if ($disk->exists($file_name)) {
-                return response()->download($storage_path . $file_name);
+                return response()->download($storage_path.$file_name);
             } else {
                 abort(404, trans('backpack::backup.backup_doesnt_exist'));
             }
