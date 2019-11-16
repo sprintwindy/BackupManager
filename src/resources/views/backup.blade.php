@@ -74,14 +74,14 @@
                     new Noty({
                         text: "<strong>{{ trans('backpack::backup.create_warning_title') }}</strong><br>{{ trans('backpack::backup.create_warning_message') }}",
                         type: "warning"
-                    });
+                    }).show();
                 }
                 else
                 {
                     new Noty({
                         text: "<strong>{{ trans('backpack::backup.create_confirmation_title') }}</strong><br>{{ trans('backpack::backup.create_confirmation_message') }}",
                         type: "success"
-                    });
+                    }).show();
                 }
             },
             error: function(result) {
@@ -89,7 +89,7 @@
                 new Noty({
                     text: "<strong>{{ trans('backpack::backup.create_error_title') }}</strong><br>{{ trans('backpack::backup.create_error_message') }}",
                     type: "warning"
-                });
+                }).show();
             }
         });
     });
@@ -109,7 +109,7 @@
                     new Noty({
                         text: "<strong>{{ trans('backpack::backup.delete_confirmation_title') }}</strong><br>{{ trans('backpack::backup.delete_confirmation_message') }}",
                         type: "success"
-                    });
+                    }).show();
                     // delete the row from the table
                     delete_button.parentsUntil('tr').parent().remove();
                 },
@@ -118,14 +118,14 @@
                     new Noty({
                         text: "<strong>{{ trans('backpack::backup.delete_error_title') }}</strong><br>{{ trans('backpack::backup.delete_error_message') }}",
                         type: "warning"
-                    });
+                    }).show();
                 }
             });
         } else {
             new Noty({
                 text: "<strong>{{ trans('backpack::backup.delete_cancel_title') }}</strong><br>{{ trans('backpack::backup.delete_cancel_message') }}",
                 type: "info"
-            });
+            }).show();
         }
       });
 
