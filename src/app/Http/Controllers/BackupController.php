@@ -31,13 +31,13 @@ class BackupController extends Controller
                 // only take the zip files into account
                 if (substr($f, -4) == '.zip' && $disk->exists($f)) {
                     $this->data['backups'][] = [
-                        'file_path'     => $f,
-                        'file_name'     => str_replace('backups/', '', $f),
-                        'file_size'     => $disk->size($f),
+                        'file_path' => $f,
+                        'file_name' => str_replace('backups/', '', $f),
+                        'file_size' => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
-                        'disk'          => $disk_name,
-                        'download'      => ($adapter instanceof Local) ? true : false,
-                        ];
+                        'disk' => $disk_name,
+                        'download' => ($adapter instanceof Local) ? true : false,
+                    ];
                 }
             }
         }
@@ -51,6 +51,7 @@ class BackupController extends Controller
 
     public function create()
     {
+        $message = 'success';
         try {
             ini_set('max_execution_time', 600);
 
@@ -58,12 +59,22 @@ class BackupController extends Controller
 
             Artisan::call('backup:run');
 
-            Log::info("Backpack\BackupManager -- backup process has started");
+            $output = Artisan::output();
+            if (strpos($output, 'Backup failed because')) {
+                preg_match('/Backup failed because(.*?)$/ms', $output, $match);
+                $message = "Backpack\BackupManager -- backup process failed because ";
+                $message .= isset($match[1]) ? $match[1] : '';
+                Log::error($message . PHP_EOL . $output);
+            } else {
+                Log::info("Backpack\BackupManager -- backup process has started");
+            }
+
         } catch (Exception $e) {
-            Response::make($e->getMessage(), 500);
+            Log::error($e);
+            return Response::make($e->getMessage(), 500);
         }
 
-        return 'success';
+        return $message;
     }
 
     /**
@@ -79,7 +90,7 @@ class BackupController extends Controller
             $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
             if ($disk->exists($file_name)) {
-                return response()->download($storage_path.$file_name);
+                return response()->download($storage_path . $file_name);
             } else {
                 abort(404, trans('backpack::backup.backup_doesnt_exist'));
             }
