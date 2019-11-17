@@ -8,6 +8,7 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ### Fixed
 - merged #73 - notifications did not show;
+- merged #75 - properly log backup erors now;
 
 
 ## [2.0.0] - 2019-09-24
