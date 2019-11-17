@@ -4,6 +4,11 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
+## [2.0.1] - 2019-11-17
+
+### Fixed
+- merged #73 - notifications did not show;
+
 
 ## [2.0.0] - 2019-09-24
 
