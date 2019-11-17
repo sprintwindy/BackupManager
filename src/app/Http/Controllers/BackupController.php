@@ -52,6 +52,7 @@ class BackupController extends Controller
     public function create()
     {
         $message = 'success';
+
         try {
             ini_set('max_execution_time', 600);
 
@@ -64,13 +65,13 @@ class BackupController extends Controller
                 preg_match('/Backup failed because(.*?)$/ms', $output, $match);
                 $message = "Backpack\BackupManager -- backup process failed because ";
                 $message .= isset($match[1]) ? $match[1] : '';
-                Log::error($message . PHP_EOL . $output);
+                Log::error($message.PHP_EOL.$output);
             } else {
                 Log::info("Backpack\BackupManager -- backup process has started");
             }
-
         } catch (Exception $e) {
             Log::error($e);
+
             return Response::make($e->getMessage(), 500);
         }
 
