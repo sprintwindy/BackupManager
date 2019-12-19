@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'    => 'پرونده پشتیبان با موفقیت حذف شد.',
     'delete_error_title'             => 'خطا',
     'delete_error_message'           => 'پرونده پشتیبان حذف نشده است.',
-    'delete_cancel_title'            => "مشکلی نیست",
+    'delete_cancel_title'            => 'مشکلی نیست',
     'delete_cancel_message'          => 'پرونده پشتیبان حذف نشده است.',
     'create_confirmation_title'      => 'فرآیند پشتیبان‌گیری شروع شد.',
     'create_confirmation_message'    => 'لطفا چند دقیقه صبر کنید تا کامل شود ، سپس صفحه را تازه کنید.',
@@ -35,6 +35,6 @@ return [
     'create_warning_message'         => 'نسخه پشتیبان شما ممکن است ایجاد نشده باشد. لطفاً پرونده ها را برای جزئیات بیشتر بررسی کنید.',
     'location'                       => 'محل',
     'no_disks_configured'            => 'دیسک پشتیبانی در config/backup.php تنظیم نشده است.',
-    'backup_doesnt_exist'            => "پرونده پشتیبان وجود ندارد.",
+    'backup_doesnt_exist'            => 'پرونده پشتیبان وجود ندارد.',
     'only_local_downloads_supported' => 'تنها دانلود از سیستم‌فایل محلی پشتیبانی می‌شود',
 ];
