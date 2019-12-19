@@ -4,6 +4,12 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
+## [2.0.2] - 2019-12-19
+
+### Added
+- Farsi (Persian) language file;
+
+
 ## [2.0.1] - 2019-11-17
 
 ### Fixed
