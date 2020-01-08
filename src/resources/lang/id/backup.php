@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'    => 'File cadangan telah dihapus.',
     'delete_error_title'             => 'Terjadi kesalahan',
     'delete_error_message'           => 'File cadangan TIDAK dihapus.',
-    'delete_cancel_title'            => "Tidak apa-apa",
+    'delete_cancel_title'            => 'Tidak apa-apa',
     'delete_cancel_message'          => 'File cadangan TIDAK dihapus.',
     'create_confirmation_title'      => 'Proses pencadangan dimulai',
     'create_confirmation_message'    => 'Harap tunggu beberapa menit hingga selesai, lalu segarkan laman.',
@@ -35,6 +35,6 @@ return [
     'create_warning_message'         => 'Cadangan Anda TIDAK dapat dibuat. Silakan periksa file log untuk detailnya.',
     'location'                       => 'Lokasi',
     'no_disks_configured'            => 'Tidak ada disk cadangan yang dikonfigurasi di config/backup.php',
-    'backup_doesnt_exist'            => "File cadangan tidak ada.",
+    'backup_doesnt_exist'            => 'File cadangan tidak ada.',
     'only_local_downloads_supported' => 'Hanya unduhan dari sistem file Lokal yang didukung.',
 ];
