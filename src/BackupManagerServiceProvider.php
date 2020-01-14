@@ -82,7 +82,7 @@ class BackupManagerServiceProvider extends ServiceProvider
 
         // use this if your package has a config file
         config([
-                'config/backup.php',
+            'config/backup.php',
         ]);
     }
 }

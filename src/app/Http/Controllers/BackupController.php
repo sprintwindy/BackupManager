@@ -37,7 +37,7 @@ class BackupController extends Controller
                         'last_modified' => $disk->lastModified($f),
                         'disk'          => $disk_name,
                         'download'      => ($adapter instanceof Local) ? true : false,
-                        ];
+                    ];
                 }
             }
         }
