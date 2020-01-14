@@ -4,6 +4,12 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
+## [2.0.3] - 2020-01-14
+
+### Added
+- Indonesian language file;
+
+
 ## [2.0.2] - 2019-12-19
 
 ### Added
