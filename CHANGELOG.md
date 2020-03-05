@@ -4,6 +4,12 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
+## [2.0.4] - 2020-03-05
+
+### Fixed
+- Upgraded PHPUnit;
+
+
 ## [2.0.3] - 2020-01-14
 
 ### Added
