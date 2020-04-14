@@ -15,8 +15,8 @@ Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
     'middleware' => ['web', 'admin'],
 ], function () {
-    Route::get('backup', 'BackupController@index');
-    Route::put('backup/create', 'BackupController@create');
-    Route::get('backup/download/{file_name?}', 'BackupController@download');
-    Route::delete('backup/delete/{file_name?}', 'BackupController@delete')->where('file_name', '(.*)');
+    Route::get('backup', 'BackupController@index')->name('backup.index');
+    Route::put('backup/create', 'BackupController@create')->name('backup.store');
+    Route::get('backup/download/{file_name?}', 'BackupController@download')->name('backup.download');
+    Route::delete('backup/delete/{file_name?}', 'BackupController@delete')->where('file_name', '(.*)')->name('backup.destroy');
 });
