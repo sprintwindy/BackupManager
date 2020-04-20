@@ -30,7 +30,8 @@ class BackupManagerServiceProvider extends ServiceProvider
     {
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
-            __DIR__.'/config/backup.php', 'backpack.backupmanager'
+            __DIR__.'/config/backup.php',
+            'backpack.backupmanager'
         );
 
         // LOAD THE VIEWS
