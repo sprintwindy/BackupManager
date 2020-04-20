@@ -4,6 +4,12 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
+## [2.0.5] - 2020-04-20
+
+### Added
+- added names to routes @iMokhles (#80)
+
+
 ## [2.0.4] - 2020-03-05
 
 ### Fixed
