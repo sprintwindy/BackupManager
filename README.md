@@ -91,6 +91,10 @@ Point and click, baby. Point and click.
 Try at **your-project-domain/admin/backup**
 
 
+## Upgrading from 2.x to 3.x
+
+Change your required version to ```"backpack/backupmanager": "^3.0",``` and run ```composer update```. There are no breaking changes just icons that are show using ```la la-icon``` instead of ```fa fa-icon```.
+
 
 ## Upgrading from 1.2.x to 1.3.x
 
