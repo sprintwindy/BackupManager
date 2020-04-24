@@ -10,7 +10,7 @@ All Notable changes to `backupmanager` will be documented in this file
 - support for Backpack 4.1;
 
 ### Removed
-- support for Backpack 4.1 (just because icons are now ```la la-download``` instead of ```fa fa-download```);
+- support for Backpack 4.0 (just because icons are now ```la la-download``` instead of ```fa fa-download```);
 
 
 ----------
