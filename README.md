@@ -28,7 +28,7 @@ composer require backpack/backupmanager
 php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"  --tag=config
 
 # [optional] Add a sidebar_content item for it
-php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon fa fa-hdd-o'></i> Backups</a></li>"
+php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
 2) Add a new "disk" to config/filesystems.php:
