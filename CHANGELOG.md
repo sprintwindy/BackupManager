@@ -4,7 +4,7 @@ All Notable changes to `backupmanager` will be documented in this file
 
 ----------
 
-## [3.0.0] - 2020-04-24
+## [3.0.0] - 2020-05-06
 
 ### Added
 - support for Backpack 4.1;
