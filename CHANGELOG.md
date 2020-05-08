@@ -3,6 +3,13 @@
 All Notable changes to `backupmanager` will be documented in this file
 
 ----------
+IMPORTANT
+----------
+
+We no longer use this file to track changes. Please see this repo's "Releases" tab, on Github:
+https://github.com/Laravel-Backpack/BackupManager/releases
+
+----------
 
 ## [3.0.0] - 2020-05-06
 
