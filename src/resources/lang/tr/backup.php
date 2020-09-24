@@ -25,7 +25,7 @@ return [
     'delete_confirmation_message'    => 'Yedek dosyası silindi.',
     'delete_error_title'             => 'Hata',
     'delete_error_message'           => 'Yedek dosyası silinemedi.',
-    'delete_cancel_title'            => "It's ok",
+    'delete_cancel_title'            => "İşlem Sonucu",
     'delete_cancel_message'          => 'Yedek dosyası silinemedi.',
     'create_confirmation_title'      => 'Yedekleme tamamlandı',
     'create_confirmation_message'    => 'Sayfa 3 saniye içerisinde yenilenecektir.',
