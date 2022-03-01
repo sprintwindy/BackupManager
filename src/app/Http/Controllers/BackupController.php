@@ -83,15 +83,19 @@ class BackupController extends Controller
      */
     public function download()
     {
-        $disk = Storage::disk(Request::input('disk'));
+        $disk_name = Request::input('disk');
+        $disk = Storage::disk($disk_name);
         $file_name = Request::input('file_name');
-        $adapter = $disk->getDriver()->getAdapter();
+        $can_download = config("filesystems.disks.$disk_name.driver") == 'local';
 
-        if ($adapter instanceof Local) {
-            $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
-
+        if ($can_download) {
             if ($disk->exists($file_name)) {
-                return response()->download($storage_path.$file_name);
+                if (method_exists($disk->getAdapter(), 'getPathPrefix')) {
+                    $storage_path = $disk->getAdapter()->getPathPrefix();
+                    return response()->download($storage_path.$file_name);
+                } else {
+                    return $disk->download($file_name);
+                }
             } else {
                 abort(404, trans('backpack::backup.backup_doesnt_exist'));
             }
