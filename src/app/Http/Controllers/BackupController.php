@@ -91,6 +91,7 @@ class BackupController extends Controller
             if ($disk->exists($file_name)) {
                 if (method_exists($disk->getAdapter(), 'getPathPrefix')) {
                     $storage_path = $disk->getAdapter()->getPathPrefix();
+
                     return response()->download($storage_path.$file_name);
                 } else {
                     return $disk->download($file_name);
