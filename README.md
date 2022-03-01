@@ -76,7 +76,10 @@ You can do that in your config/database.php file, where you define your database
             'strict'            => false,
             'engine'            => null,
             'dump' => [
-               'dump_binary_path' => '/Applications/MAMP/Library/bin/', // only the path, so without `mysqldump` or `pg_dump`; this is a working example from MAMP on Mac OS
+ 
+               'dump_binary_path' => '/path/to/directory/', // only the path, without `mysqldump` or `pg_dump`
+               // 'dump_binary_path' => '/Applications/MAMP/Library/bin/', // works for MAMP on Mac OS
+               // 'dump_binary_path' => '/opt/homebrew/bin/', // works for Laravel Valet on Mac OS
                'use_single_transaction',
                'timeout' => 60 * 5, // 5 minute timeout
                // 'exclude_tables' => ['table1', 'table2'],
