@@ -5,7 +5,6 @@ namespace Backpack\BackupManager\app\Http\Controllers;
 use Artisan;
 use Exception;
 use Illuminate\Routing\Controller;
-use League\Flysystem\Adapter\Local;
 use Log;
 use Request;
 use Response;
