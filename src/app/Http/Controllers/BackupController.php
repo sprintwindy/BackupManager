@@ -23,7 +23,7 @@ class BackupController extends Controller
 
         foreach (config('backup.backup.destination.disks') as $disk_name) {
             $disk = Storage::disk($disk_name);
-            $adapter = $disk->getDriver()->getAdapter();
+            $can_download = config("filesystems.disks.$disk_name.driver") == 'local';
             $files = $disk->allFiles();
 
             // make an array of backup files, with their filesize and creation date
@@ -36,7 +36,7 @@ class BackupController extends Controller
                         'file_size'     => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
                         'disk'          => $disk_name,
-                        'download'      => ($adapter instanceof Local) ? true : false,
+                        'download'      => $can_download ? true : false,
                     ];
                 }
             }
