@@ -64,6 +64,11 @@
 
         var create_backup_url = $(this).attr('href');
 
+        new Noty({
+            text: "<strong>{{ trans('backpack::backup.create_confirmation_title') }}</strong><br>{{ trans('backpack::backup.create_started_message') }}",
+            type: "success"
+        }).show();
+
         // do the backup through ajax
         $.ajax({
             url: create_backup_url,
@@ -79,7 +84,7 @@
                 else
                 {
                     new Noty({
-                        text: "<strong>{{ trans('backpack::backup.create_confirmation_title') }}</strong><br>{{ trans('backpack::backup.create_confirmation_message') }}",
+                        text: "<strong>{{ trans('backpack::backup.create_completed_title') }}</strong><br>{{ trans('backpack::backup.create_confirmation_message') }}",
                         type: "success"
                     }).show();
                 }
