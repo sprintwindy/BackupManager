@@ -38,6 +38,6 @@ return [
     'backup_doesnt_exist'            => "The backup file doesn't exist.",
     'only_local_downloads_supported' => 'Only downloads from the Local filesystem are supported.',
     'unknown_disk'                   => 'Unknown disk.',
-    'create_started_message'    => 'Please wait a few minutes for it to complete, then refresh the page.',
-    'create_completed_title'    => 'Your backup is complete.',
+    'create_started_message'         => 'Please wait a few minutes for it to complete, then refresh the page.',
+    'create_completed_title'         => 'Your backup is complete.',
 ];

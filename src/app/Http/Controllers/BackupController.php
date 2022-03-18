@@ -10,7 +10,6 @@ use Request;
 use Response;
 use Storage;
 
-
 class BackupController extends Controller
 {
     public function index()
@@ -91,22 +90,22 @@ class BackupController extends Controller
     {
         $diskName = Request::input('disk');
 
-        if(! in_array($diskName, config('backup.backup.destination.disks'))) {
+        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.unknown_disk'));
         }
 
         $disk = Storage::disk($diskName);
         $fileName = Request::input('file_name');
 
-        if(! is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true)) {
+        if (!is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true)) {
             abort(404, trans('backpack::backup.only_local_downloads_supported'));
         }
 
-        if(! $disk->exists($fileName)) {
+        if (!$disk->exists($fileName)) {
             abort(404, trans('backpack::backup.backup_doesnt_exist'));
         }
 
-        return $disk->download($fileName);  
+        return $disk->download($fileName);
     }
 
     /**

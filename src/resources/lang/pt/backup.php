@@ -38,6 +38,6 @@ return [
     'backup_doesnt_exist'            => 'O backup não existe',
     'only_local_downloads_supported' => 'Apenas são permitidas transferências do sistema de ficheiros local.',
     'unknown_disk'                   => 'Disco de backup desconhecido.',
-    'create_started_message'    => 'Aguarde uns minutos pela conclusão do backup, depois recarregue a página.',
-    'create_completed_title'    => 'O backup está completo.',
+    'create_started_message'         => 'Aguarde uns minutos pela conclusão do backup, depois recarregue a página.',
+    'create_completed_title'         => 'O backup está completo.',
 ];

@@ -10,6 +10,6 @@ return [
     // one of the things that Backpack does by default is increasing the `max_execution_time` for
     // php scripts, as listing all files for backup could take some time to execute.
     'ini_settings' => [
-        'max_execution_time' => 600
+        'max_execution_time' => 600,
     ],
 ];
