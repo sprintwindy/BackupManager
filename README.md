@@ -8,12 +8,13 @@
 [![Style CI](https://styleci.io/repos/53956594/shield)](https://styleci.io/repos/53956594)
 [![Total Downloads](https://img.shields.io/packagist/dt/backpack/backupmanager.svg?style=flat-square)](https://packagist.org/packages/backpack/backupmanager)
 
-An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel-backup). Allows the admin to easily manage backups (download and delete). Used in the Backpack package, on Laravel 5.2+ to 6.
+An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel-backup). Allows the admin to easily manage backups (download and delete). Used in the Backpack package, on Laravel 5.2+ to 9.
 
 
 > ### Security updates and breaking changes
-> Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
-![Backpack\BackupManager screenshot](https://backpackforlaravel.com/uploads/screenshots/backups_running.png)
+> Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email 2 times/year, max.
+
+![Backpack\BackupManager screenshot](https://user-images.githubusercontent.com/1032474/150080754-97dca93f-3cac-452b-9bcf-cc51becd3055.png)
 
 
 ## Install
@@ -75,7 +76,10 @@ You can do that in your config/database.php file, where you define your database
             'strict'            => false,
             'engine'            => null,
             'dump' => [
-               'dump_binary_path' => '/Applications/MAMP/Library/bin/', // only the path, so without `mysqldump` or `pg_dump`; this is a working example from MAMP on Mac OS
+ 
+               'dump_binary_path' => '/path/to/directory/', // only the path, without `mysqldump` or `pg_dump`
+               // 'dump_binary_path' => '/Applications/MAMP/Library/bin/', // works for MAMP on Mac OS
+               // 'dump_binary_path' => '/opt/homebrew/bin/', // works for Laravel Valet on Mac OS
                'use_single_transaction',
                'timeout' => 60 * 5, // 5 minute timeout
                // 'exclude_tables' => ['table1', 'table2'],
