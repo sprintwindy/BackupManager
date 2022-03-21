@@ -29,7 +29,7 @@ return [
     'delete_cancel_title'            => 'Está tudo bem!',
     'delete_cancel_message'          => 'O backup NÃO foi apagado.',
     'create_confirmation_title'      => 'Backup concluído',
-    'create_confirmation_message'    => 'A página vai ser recarregada dentro de 3 segundos',
+    'create_confirmation_message'    => 'Recarregue a página para ver o backup na lista.',
     'create_error_title'             => 'Erro ao fazer backup',
     'create_error_message'           => 'O backup não foi criado.',
     'create_warning_title'           => 'Erro desconhecido',
@@ -38,4 +38,7 @@ return [
     'no_disks_configured'            => 'Nenhum foi configurado nenhum disco de backups em config/backup.php',
     'backup_doesnt_exist'            => 'O backup não existe',
     'only_local_downloads_supported' => 'Apenas são permitidas transferências do sistema de ficheiros local.',
+    'unknown_disk'                   => 'Disco de backup desconhecido.',
+    'create_started_message'         => 'Aguarde uns minutos pela conclusão do backup, depois recarregue a página.',
+    'create_completed_title'         => 'O backup está completo.',
 ];

@@ -28,8 +28,8 @@ return [
     'delete_error_message'           => 'The backup file has NOT been deleted.',
     'delete_cancel_title'            => "It's ok",
     'delete_cancel_message'          => 'The backup file has NOT been deleted.',
-    'create_confirmation_title'      => 'Backup process started',
-    'create_confirmation_message'    => 'Please wait a few minutes for it to complete, then refresh the page.',
+    'create_confirmation_title'      => 'Backup process started.',
+    'create_confirmation_message'    => 'Refresh the page for it to show in the list.',
     'create_error_title'             => 'Backup error',
     'create_error_message'           => 'The backup file could NOT be created.',
     'create_warning_title'           => 'Unknown error',
@@ -38,4 +38,7 @@ return [
     'no_disks_configured'            => 'No backup disks configured in config/backup.php',
     'backup_doesnt_exist'            => "The backup file doesn't exist.",
     'only_local_downloads_supported' => 'Only downloads from the Local filesystem are supported.',
+    'unknown_disk'                   => 'Unknown disk.',
+    'create_started_message'         => 'Please wait a few minutes for it to complete, then refresh the page.',
+    'create_completed_title'         => 'Your backup is complete.',
 ];

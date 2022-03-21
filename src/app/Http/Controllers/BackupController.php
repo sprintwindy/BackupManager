@@ -5,7 +5,6 @@ namespace Backpack\BackupManager\app\Http\Controllers;
 use Artisan;
 use Exception;
 use Illuminate\Routing\Controller;
-use League\Flysystem\Adapter\Local;
 use Log;
 use Request;
 use Response;
@@ -23,7 +22,7 @@ class BackupController extends Controller
 
         foreach (config('backup.backup.destination.disks') as $disk_name) {
             $disk = Storage::disk($disk_name);
-            $adapter = $disk->getDriver()->getAdapter();
+
             $files = $disk->allFiles();
 
             // make an array of backup files, with their filesize and creation date
@@ -36,7 +35,7 @@ class BackupController extends Controller
                         'file_size'     => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
                         'disk'          => $disk_name,
-                        'download'      => ($adapter instanceof Local) ? true : false,
+                        'download'      => is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true),
                     ];
                 }
             }
@@ -53,12 +52,18 @@ class BackupController extends Controller
     {
         $message = 'success';
 
+        $command = config('backpack.backupmanager.artisan_command_on_button_click') ?? 'backup:run';
+
+        $flags = $command === 'backup:run' ? config('backup.backpack_flags', []) : [];
+
         try {
-            ini_set('max_execution_time', 600);
+            foreach (config('backpack.backupmanager.ini_settings', []) as $setting => $value) {
+                ini_set($setting, $value);
+            }
 
             Log::info('Backpack\BackupManager -- Called backup:run from admin interface');
 
-            Artisan::call('backup:run');
+            Artisan::call($command, $flags);
 
             $output = Artisan::output();
             if (strpos($output, 'Backup failed because')) {
@@ -83,21 +88,24 @@ class BackupController extends Controller
      */
     public function download()
     {
-        $disk = Storage::disk(Request::input('disk'));
-        $file_name = Request::input('file_name');
-        $adapter = $disk->getDriver()->getAdapter();
+        $diskName = Request::input('disk');
 
-        if ($adapter instanceof Local) {
-            $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
+        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
+            abort(500, trans('backpack::backup.unknown_disk'));
+        }
 
-            if ($disk->exists($file_name)) {
-                return response()->download($storage_path.$file_name);
-            } else {
-                abort(404, trans('backpack::backup.backup_doesnt_exist'));
-            }
-        } else {
+        $disk = Storage::disk($diskName);
+        $fileName = Request::input('file_name');
+
+        if (!is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true)) {
             abort(404, trans('backpack::backup.only_local_downloads_supported'));
         }
+
+        if (!$disk->exists($fileName)) {
+            abort(404, trans('backpack::backup.backup_doesnt_exist'));
+        }
+
+        return $disk->download($fileName);
     }
 
     /**
