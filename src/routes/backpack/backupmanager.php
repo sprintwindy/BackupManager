@@ -17,6 +17,6 @@ Route::group([
 ], function () {
     Route::get('backup', 'BackupController@index')->name('backup.index');
     Route::put('backup/create', 'BackupController@create')->name('backup.store');
-    Route::get('backup/download/{file_name?}', 'BackupController@download')->name('backup.download');
-    Route::delete('backup/delete/{file_name?}', 'BackupController@delete')->where('file_name', '(.*)')->name('backup.destroy');
+    Route::get('backup/download/', 'BackupController@download')->name('backup.download');
+    Route::delete('backup/delete/', 'BackupController@delete')->name('backup.destroy');
 });

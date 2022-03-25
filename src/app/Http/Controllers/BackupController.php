@@ -3,39 +3,44 @@
 namespace Backpack\BackupManager\app\Http\Controllers;
 
 use Artisan;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Routing\Controller;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Log;
 use Request;
-use Response;
 use Storage;
 
 class BackupController extends Controller
 {
     public function index()
     {
-        if (!count(config('backup.backup.destination.disks'))) {
-            dd(trans('backpack::backup.no_disks_configured'));
+        if (! count(config('backup.backup.destination.disks'))) {
+            abort(500, trans('backpack::backup.no_disks_configured'));
         }
 
         $this->data['backups'] = [];
 
-        foreach (config('backup.backup.destination.disks') as $disk_name) {
-            $disk = Storage::disk($disk_name);
-
+        foreach (config('backup.backup.destination.disks') as $diskName) {
+            $disk = Storage::disk($diskName);
             $files = $disk->allFiles();
 
             // make an array of backup files, with their filesize and creation date
-            foreach ($files as $k => $f) {
+            foreach ($files as $file) {
+                $fileName = str_replace('backups/', '', $file);
+                $downloadLink = url(config('backpack.base.route_prefix', 'admin').'/backup/download/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName));
+                $deleteLink = url(config('backpack.base.route_prefix', 'admin').'/backup/delete/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName));
+
                 // only take the zip files into account
-                if (substr($f, -4) == '.zip' && $disk->exists($f)) {
-                    $this->data['backups'][] = [
-                        'file_path'     => $f,
-                        'file_name'     => str_replace('backups/', '', $f),
-                        'file_size'     => $disk->size($f),
-                        'last_modified' => $disk->lastModified($f),
-                        'disk'          => $disk_name,
-                        'download'      => is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true),
+                if (substr($file, -4) == '.zip' && $disk->exists($file)) {
+                    $this->data['backups'][] = (object) [
+                        'filePath' => $file,
+                        'fileName' => $fileName,
+                        'fileSize' => round((int) $disk->size($file) / 1048576, 2),
+                        'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file))->formatLocalized('%d %B %Y, %H:%M'),
+                        'diskName' => $diskName,
+                        'downloadLink' => is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true) ? $downloadLink : null,
+                        'deleteLink' => $deleteLink,
                     ];
                 }
             }
@@ -50,8 +55,6 @@ class BackupController extends Controller
 
     public function create()
     {
-        $message = 'success';
-
         $command = config('backpack.backupmanager.artisan_command_on_button_click') ?? 'backup:run';
 
         $flags = $command === 'backup:run' ? config('backup.backpack_flags', []) : [];
@@ -68,19 +71,18 @@ class BackupController extends Controller
             $output = Artisan::output();
             if (strpos($output, 'Backup failed because')) {
                 preg_match('/Backup failed because(.*?)$/ms', $output, $match);
-                $message = "Backpack\BackupManager -- backup process failed because ";
-                $message .= isset($match[1]) ? $match[1] : '';
+                $message = "Backpack\BackupManager -- backup process failed because ".($match[1] ?? '');
                 Log::error($message.PHP_EOL.$output);
-            } else {
-                Log::info("Backpack\BackupManager -- backup process has started");
+
+                return response($message, 500);
             }
         } catch (Exception $e) {
             Log::error($e);
 
-            return Response::make($e->getMessage(), 500);
+            return response($e->getMessage(), 500);
         }
 
-        return $message;
+        return true;
     }
 
     /**
@@ -89,19 +91,18 @@ class BackupController extends Controller
     public function download()
     {
         $diskName = Request::input('disk');
+        $fileName = Request::input('file_name');
+        $disk = Storage::disk($diskName);
 
-        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
+        if (! in_array($diskName, config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.unknown_disk'));
         }
 
-        $disk = Storage::disk($diskName);
-        $fileName = Request::input('file_name');
-
-        if (!is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true)) {
+        if (! is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true)) {
             abort(404, trans('backpack::backup.only_local_downloads_supported'));
         }
 
-        if (!$disk->exists($fileName)) {
+        if (! $disk->exists($fileName)) {
             abort(404, trans('backpack::backup.backup_doesnt_exist'));
         }
 
@@ -111,16 +112,16 @@ class BackupController extends Controller
     /**
      * Deletes a backup file.
      */
-    public function delete($file_name)
+    public function delete()
     {
-        $disk = Storage::disk(Request::input('disk'));
+        $diskName = Request::input('disk');
+        $fileName = Request::input('file_name');
+        $disk = Storage::disk($diskName);
 
-        if ($disk->exists($file_name)) {
-            $disk->delete($file_name);
-
-            return 'success';
-        } else {
-            abort(404, trans('backpack::backup.backup_doesnt_exist'));
+        if (! $disk->exists($fileName)) {
+            return response(trans('backpack::backup.backup_doesnt_exist'), 404);
         }
+
+        return $disk->delete($fileName);
     }
 }
