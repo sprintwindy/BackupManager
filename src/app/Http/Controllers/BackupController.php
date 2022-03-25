@@ -15,7 +15,7 @@ class BackupController extends Controller
 {
     public function index()
     {
-        if (! count(config('backup.backup.destination.disks'))) {
+        if (!count(config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.no_disks_configured'));
         }
 
@@ -34,13 +34,13 @@ class BackupController extends Controller
                 // only take the zip files into account
                 if (substr($file, -4) == '.zip' && $disk->exists($file)) {
                     $this->data['backups'][] = (object) [
-                        'filePath' => $file,
-                        'fileName' => $fileName,
-                        'fileSize' => round((int) $disk->size($file) / 1048576, 2),
+                        'filePath'     => $file,
+                        'fileName'     => $fileName,
+                        'fileSize'     => round((int) $disk->size($file) / 1048576, 2),
                         'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file))->formatLocalized('%d %B %Y, %H:%M'),
-                        'diskName' => $diskName,
+                        'diskName'     => $diskName,
                         'downloadLink' => is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true) ? $downloadLink : null,
-                        'deleteLink' => $deleteLink,
+                        'deleteLink'   => $deleteLink,
                     ];
                 }
             }
@@ -94,15 +94,15 @@ class BackupController extends Controller
         $fileName = Request::input('file_name');
         $disk = Storage::disk($diskName);
 
-        if (! in_array($diskName, config('backup.backup.destination.disks'))) {
+        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.unknown_disk'));
         }
 
-        if (! is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true)) {
+        if (!is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true)) {
             abort(404, trans('backpack::backup.only_local_downloads_supported'));
         }
 
-        if (! $disk->exists($fileName)) {
+        if (!$disk->exists($fileName)) {
             abort(404, trans('backpack::backup.backup_doesnt_exist'));
         }
 
@@ -118,7 +118,7 @@ class BackupController extends Controller
         $fileName = Request::input('file_name');
         $disk = Storage::disk($diskName);
 
-        if (! $disk->exists($fileName)) {
+        if (!$disk->exists($fileName)) {
             return response(trans('backpack::backup.backup_doesnt_exist'), 404);
         }
 
