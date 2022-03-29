@@ -113,7 +113,13 @@ class BackupController extends Controller
      */
     public function delete($file_name)
     {
-        $disk = Storage::disk(Request::input('disk'));
+        $diskName = Request::input('disk');
+
+        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
+            abort(500, trans('backpack::backup.unknown_disk'));
+        }
+        
+        $disk = Storage::disk($diskName);
 
         if ($disk->exists($file_name)) {
             $disk->delete($file_name);
