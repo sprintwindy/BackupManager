@@ -118,7 +118,7 @@ class BackupController extends Controller
         if (!in_array($diskName, config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.unknown_disk'));
         }
-        
+
         $disk = Storage::disk($diskName);
 
         if ($disk->exists($file_name)) {
