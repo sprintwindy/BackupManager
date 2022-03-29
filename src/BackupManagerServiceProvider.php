@@ -45,9 +45,8 @@ class BackupManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
         // publish config file
-        $this->publishes([__DIR__.'/config/backupmanager.php' => config_path('backpack/backupmanager.php')], 'config');
+        $this->publishes([__DIR__.'/config/backupmanager.php' => config_path('backpack/backupmanager.php')], 'backup-config');
 
-        $this->publishes([base_path('vendor/spatie/laravel-backup/config/backup.php') => config_path('backup.php')], 'config');
         // publish lang files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
         // publish the views
