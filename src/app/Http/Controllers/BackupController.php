@@ -130,13 +130,14 @@ class BackupController extends Controller
     }
 
     /**
-     * Check if disk is a backup disk
-     * 
+     * Check if disk is a backup disk.
+     *
      * @param string $diskName
+     *
      * @return bool
      */
-
-     private function isBackupDisk(string $diskName) {
+    private function isBackupDisk(string $diskName)
+    {
         return in_array($diskName, config('backup.backup.destination.disks'));
-     }
+    }
 }
