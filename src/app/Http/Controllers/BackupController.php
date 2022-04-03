@@ -29,8 +29,8 @@ class BackupController extends Controller
             foreach ($files as $file) {
                 // remove diskname from filename
                 $fileName = str_replace('backups/', '', $file);
-                $downloadLink = route('backup.download').'/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName);
-                $deleteLink = route('backup.destroy').'/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName);
+                $downloadLink = route('backup.download', ['file_name' => $fileName, 'disk' => $diskName]);
+                $deleteLink = route('backup.destroy', ['file_name' => $fileName, 'disk' => $diskName]);
 
                 // only take the zip files into account
                 if (substr($file, -4) == '.zip' && $disk->exists($file)) {
