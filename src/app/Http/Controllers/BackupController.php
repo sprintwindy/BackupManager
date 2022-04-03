@@ -117,7 +117,7 @@ class BackupController extends Controller
         $fileName = Request::input('file_name');
 
         if (!$this->isBackupDisk($diskName)) {
-            abort(500, trans('backpack::backup.unknown_disk'));
+            return response(trans('backpack::backup.unknown_disk'), 500);
         }
 
         $disk = Storage::disk($diskName);
