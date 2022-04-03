@@ -27,9 +27,10 @@ class BackupController extends Controller
 
             // make an array of backup files, with their filesize and creation date
             foreach ($files as $file) {
+                // remove diskname from filename
                 $fileName = str_replace('backups/', '', $file);
-                $downloadLink = url(config('backpack.base.route_prefix', 'admin').'/backup/download/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName));
-                $deleteLink = url(config('backpack.base.route_prefix', 'admin').'/backup/delete/?file_name='.urlencode($fileName).'&disk='.urlencode($diskName));
+                $downloadLink = route('backup.download', ['file_name' => $fileName, 'disk' => $diskName]);
+                $deleteLink = route('backup.destroy', ['file_name' => $fileName, 'disk' => $diskName]);
 
                 // only take the zip files into account
                 if (substr($file, -4) == '.zip' && $disk->exists($file)) {
@@ -48,7 +49,7 @@ class BackupController extends Controller
 
         // reverse the backups, so the newest one would be on top
         $this->data['backups'] = array_reverse($this->data['backups']);
-        $this->data['title'] = 'Backups';
+        $this->data['title'] = trans('backupmanager::backups');
 
         return view('backupmanager::backup', $this->data);
     }
@@ -57,8 +58,6 @@ class BackupController extends Controller
     {
         $command = config('backpack.backupmanager.artisan_command_on_button_click') ?? 'backup:run';
 
-        $flags = $command === 'backup:run' ? config('backup.backpack_flags', []) : [];
-
         try {
             foreach (config('backpack.backupmanager.ini_settings', []) as $setting => $value) {
                 ini_set($setting, $value);
@@ -66,7 +65,7 @@ class BackupController extends Controller
 
             Log::info('Backpack\BackupManager -- Called backup:run from admin interface');
 
-            Artisan::call($command, $flags);
+            Artisan::call($command);
 
             $output = Artisan::output();
             if (strpos($output, 'Backup failed because')) {
@@ -94,7 +93,7 @@ class BackupController extends Controller
         $fileName = Request::input('file_name');
         $disk = Storage::disk($diskName);
 
-        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
+        if (!$this->isBackupDisk($diskName)) {
             abort(500, trans('backpack::backup.unknown_disk'));
         }
 
@@ -116,6 +115,11 @@ class BackupController extends Controller
     {
         $diskName = Request::input('disk');
         $fileName = Request::input('file_name');
+
+        if (!$this->isBackupDisk($diskName)) {
+            return response(trans('backpack::backup.unknown_disk'), 500);
+        }
+
         $disk = Storage::disk($diskName);
 
         if (!$disk->exists($fileName)) {
@@ -123,5 +127,17 @@ class BackupController extends Controller
         }
 
         return $disk->delete($fileName);
+    }
+
+    /**
+     * Check if disk is a backup disk.
+     *
+     * @param string $diskName
+     *
+     * @return bool
+     */
+    private function isBackupDisk(string $diskName)
+    {
+        return in_array($diskName, config('backup.backup.destination.disks'));
     }
 }
