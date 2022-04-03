@@ -26,7 +26,7 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 composer require backpack/backupmanager
 
 # Publish the backup and backupmanager configs and lang files:
-php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"  --tag=backup-config --tag=lang
+php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag=backup-config --tag=lang
 
 # [optional] Add a sidebar_content item for it
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
@@ -34,9 +34,9 @@ php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-lin
 
 If you need to configure aditional stuff to your backup process like notifications you should publish the spatie backup file `php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and check [spatie documentation on how to configure your backup system](https://spatie.be/docs/laravel-backup/v8/installation-and-setup) in `config/backup.php`
 
-As far as `config/backpack/backupmanager.php` it configures how the `Backup` button works: `backup:run --disable-notifications` by default, [check backup documentation for aditional flags](https://spatie.be/docs/laravel-backup/v8/taking-backups/overview). By default notifications are disabled with `--disable-notifications` flag since they need aditional user configuration, **but is higly recommended that you configure them**. [Check here the docs on how to do it](https://spatie.be/docs/laravel-backup/v8/sending-notifications/overview), then remove the flag `--disable-notifications` from `config/backpack/backupmanager.php` button script. 
+As far as `config/backpack/backupmanager.php` it configures how the `Backup` button works: `backup:run --disable-notifications` by default, [check backup documentation for aditional flags](https://spatie.be/docs/laravel-backup/v8/taking-backups/overview). By default notifications are disabled with `--disable-notifications` flag since they need aditional user configuration, **but is higly recommended that you configure them**. [Check here the docs on how to do it](https://spatie.be/docs/laravel-backup/v8/sending-notifications/overview), then remove the flag `--disable-notifications` from `config/backpack/backupmanager.php` button script.
 
-**[TIP]** When you modify your options in  `config/backup.php` or `config/backpack/backupmanager.php`, please run manually `php artisan backup:run` to make sure it's still working after your changes. **NOTE**: `php artisan optimize:clear` and/or `php artisan config:clear` might be needed before the `backup:run` command.
+**[TIP]** When you modify your options in `config/backup.php` or `config/backpack/backupmanager.php`, please run manually `php artisan backup:run` to make sure it's still working after your changes. **NOTE**: `php artisan optimize:clear` and/or `php artisan config:clear` might be needed before the `backup:run` command.
 
 **[OPTIONAL]** Instruct Laravel to run the backups automatically in your console kernel:
 
@@ -92,9 +92,11 @@ Try at **your-project-domain/admin/backup**
 
 Change your required version to `"backpack/backupmanager": "^4.0"` and run `composer update backpack/backupmanager`.
 
-We removed the overrides of spatie config from our package publishing process, so going foward you can do the regular spatie backup configuration in `config/backup.php` and the customized backpack configuration in `config/backpack/backupmanager`.
-**1)** publish the new config file `php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag="backup-config"`. This will generate your the `config/backpack/backupmanager.php` file. By default backpack uses `--disable-notifications` flag, remove it if you are using notifications.
-**2)** if you have configured `backpack_flags` in `config/backup` now is a good time to move them to the new config, under the key: `artisan_command_on_button_click`. 
+We removed the overrides of spatie config from our package publishing process, from now on you can do the regular spatie backup configuration in `config/backup.php` and the customized backpack configuration in `config/backpack/backupmanager`.
+
+**1)** Publish the new config file `php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag="backup-config"`. This will generate the `config/backpack/backupmanager.php` file. By default backpack uses `--disable-notifications` flag, remove it if you are using notifications.
+
+**2)** If you have configured `backpack_flags` in `config/backup` you should now move them to the new config, under the key: `artisan_command_on_button_click`. 
 
 ```php
 // This command will be run when user click on the "Create a new backup" button
@@ -103,11 +105,11 @@ We removed the overrides of spatie config from our package publishing process, s
 'artisan_command_on_button_click' => 'backup:run --disable-notifications',
 ```
 
-**3)** if you didn't do anymore configs you can now safely remove the `config/backup.php` file and no need to re-publish the spatie config, **jump to step 5**.
+**3)** If you didn't do anymore configs you can now safely remove the `config/backup.php` file and there is no need to re-publish the spatie config, **jump to step 5**.
 
-**4)** if you are customizing other options in `config/backup.php` file make sure that your changes are compatible with the new config (it should be), otherwise save your config file in some other place, force publish the v8 spatie configuration file with `php artisan vendor:publish --force --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and then re-configure your stuff. 
+**4)** If you are customizing other options in `config/backup.php` file make sure that your changes are compatible with the new config (it should be), otherwise save your config file in some other place, force publish the v8 spatie configuration file with `php artisan vendor:publish --force --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and then re-configure what you need. 
 
-**5)** Clear the caches `php artisan optimize:clear` and/or `php artisan config:clear`.
+**5)** You may need to clear the cache with `php artisan optimize:clear` and/or `php artisan config:clear`.
 
 **6)** Manually run from console the `backup:run` command to make sure it's working, use `backup:run --disable-notifications` if you are not using notifications.
 
@@ -121,12 +123,11 @@ protected function schedule(Schedule $schedule)
     // this would work previously even if you didn't configured notifications, 
     // it would throw an exception but it was not reported, so script is not halted.
     $schedule->command('backup:clean')->daily()->at('04:00');
-    
+
     // now if you don't use notifications you should explicitly tell that to backup
     // otherwise the same exception will be thrown, but this time reported, 
     // halting the script execution.
     $schedule->command('backup:clean --disable-notifications')->daily()->at('04:00');
-
 }
 ```
 
@@ -162,7 +163,7 @@ Change your required version to ```"backpack/backupmanager": "^3.0",``` and run 
 
 ## Change log
 
-Follow all the changes in this package in the [releases page.](https://github.com/Laravel-Backpack/BackupManager/releases/)
+Please see the [releases page](https://github.com/Laravel-Backpack/BackupManager/releases/) for more information what has changed recently.
 
 ## Testing
 
