@@ -25,7 +25,10 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 # Install the package
 composer require backpack/backupmanager
 
-# Add a sidebar_content item for it
+# Publish the config file and lang files:
+php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"  --tag=config
+
+# [optional] Add a sidebar_content item for it
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
@@ -40,34 +43,9 @@ php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-lin
 ```
 This is where you choose a different driver if you want your backups to be stored somewhere else (S3, Dropbox, Google Drive, Box, etc).
 
-3) [optional] You can add backup flags for when the backup process is run from the user interface. In your `config/backup.php` under the `backup` key you can add the `backpack_flags` array below:
+3) [optional] Modify your backup options in ```config/backup.php```, then run ```php artisan backup:run``` to make sure it's still working.
 
-```php
-    'backup' => [
-
-        /* --------------------------------------
-         * Backpack\BackupManager Command Flags
-         * --------------------------------------
-         * These flags will be attached every time a backup is triggered
-         * by Backpack\BackupManager. By default only notifications are disabled.
-         *
-         * https://docs.spatie.be/laravel-backup/v4/taking-backups/overview
-         * --only-to-disk=name-of-your-disk
-         * --only-db
-         * --only-files
-         * --disable-notifications
-         */
-        'backpack_flags' => [
-            '--disable-notifications'=> true,
-        ],
-
-        // ...
-   ],
-```
-
-4) [optional] Modify your backup options in ```config/backup.php``` (which is `spatie/laravel-backup`'s config file), then run ```php artisan backup:run``` to make sure it's still working.
-
-5) [optional] Instruct Laravel to run the backups automatically in your console kernel:
+4) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 
 ```php
 // app/Console/Kernel.php
@@ -79,7 +57,7 @@ protected function schedule(Schedule $schedule)
 }
 ```
 
-6) Check that it works
+5) Check that it works
 
 If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location.
 
