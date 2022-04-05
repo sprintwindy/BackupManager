@@ -22,7 +22,7 @@ class BackupController extends Controller
 
         foreach (config('backup.backup.destination.disks') as $disk_name) {
             $disk = Storage::disk($disk_name);
-
+            $can_download = config("filesystems.disks.$disk_name.driver") == 'local';
             $files = $disk->allFiles();
 
             // make an array of backup files, with their filesize and creation date
@@ -35,7 +35,7 @@ class BackupController extends Controller
                         'file_size'     => $disk->size($f),
                         'last_modified' => $disk->lastModified($f),
                         'disk'          => $disk_name,
-                        'download'      => is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true),
+                        'download'      => $can_download ? true : false,
                     ];
                 }
             }
@@ -88,16 +88,24 @@ class BackupController extends Controller
      */
     public function download()
     {
-        $diskName = Request::input('disk');
+        $disk_name = Request::input('disk');
+        $disk = Storage::disk($disk_name);
+        $file_name = Request::input('file_name');
+        $can_download = config("filesystems.disks.$disk_name.driver") == 'local';
 
-        if (!in_array($diskName, config('backup.backup.destination.disks'))) {
-            abort(500, trans('backpack::backup.unknown_disk'));
-        }
+        if ($can_download) {
+            if ($disk->exists($file_name)) {
+                if (method_exists($disk->getAdapter(), 'getPathPrefix')) {
+                    $storage_path = $disk->getAdapter()->getPathPrefix();
 
-        $disk = Storage::disk($diskName);
-        $fileName = Request::input('file_name');
-
-        if (!is_a($disk->getAdapter(), 'League\Flysystem\Local\LocalFilesystemAdapter', true)) {
+                    return response()->download($storage_path.$file_name);
+                } else {
+                    return $disk->download($file_name);
+                }
+            } else {
+                abort(404, trans('backpack::backup.backup_doesnt_exist'));
+            }
+        } else {
             abort(404, trans('backpack::backup.only_local_downloads_supported'));
         }
 

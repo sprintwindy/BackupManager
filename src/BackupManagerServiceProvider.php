@@ -28,12 +28,6 @@ class BackupManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // use the vendor configuration file as fallback
-        $this->mergeConfigFrom(
-            __DIR__.'/config/backupmanager.php',
-            'backpack.backupmanager'
-        );
-
         // LOAD THE VIEWS
         // - first the published/overwritten views (in case they have any changes)
         $customViewsFolder = resource_path('views/vendor/backpack/backupmanager');
@@ -44,10 +38,6 @@ class BackupManagerServiceProvider extends ServiceProvider
         // - then the stock views that come with the package, in case a published view might be missing
         $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'backupmanager');
 
-        // publish config file
-        $this->publishes([__DIR__.'/config/backupmanager.php' => config_path('backpack/backupmanager.php')], 'config');
-
-        $this->publishes([base_path('vendor/spatie/laravel-backup/config/backup.php') => config_path('backup.php')], 'config');
         // publish lang files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
         // publish the views
