@@ -25,40 +25,18 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 # Install the package
 composer require backpack/backupmanager
 
-# Add a sidebar_content item for it
+# Publish the backup and backupmanager configs and lang files:
+php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag=backup-config --tag=lang
+
+# [optional] Add a sidebar_content item for it
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
-You will notice that two configuration files are created. You should check [spatie documentations on how to configura your backup system](https://spatie.be/docs/laravel-backup/v8/installation-and-setup) in `config/backup.php`
+If you need to configure aditional stuff to your backup process like notifications you should publish the spatie backup file `php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and check [spatie documentation on how to configure your backup system](https://spatie.be/docs/laravel-backup/v8/installation-and-setup) in `config/backup.php`
 
-As far as `config/backpack/backupmanager.php` it configures how the `Backup` button works: `--only-files, --only-db` etc.
+As far as `config/backpack/backupmanager.php` it configures how the `Backup` button works: `backup:run --disable-notifications` by default, [check backup documentation for aditional flags](https://spatie.be/docs/laravel-backup/v8/taking-backups/overview). By default notifications are disabled with `--disable-notifications` flag since they need aditional user configuration, **but is higly recommended that you configure them**. [Check here the docs on how to do it](https://spatie.be/docs/laravel-backup/v8/sending-notifications/overview), then remove the flag `--disable-notifications` from `config/backpack/backupmanager.php` button script.
 
-3) [optional] You can add backup flags for when the backup process is run from the user interface. In your `config/backup.php` under the `backup` key you can add the `backpack_flags` array below:
-
-```php
-    'backup' => [
-
-        /* --------------------------------------
-         * Backpack\BackupManager Command Flags
-         * --------------------------------------
-         * These flags will be attached every time a backup is triggered
-         * by Backpack\BackupManager. By default only notifications are disabled.
-         *
-         * https://docs.spatie.be/laravel-backup/v4/taking-backups/overview
-         * --only-to-disk=name-of-your-disk
-         * --only-db
-         * --only-files
-         * --disable-notifications
-         */
-        'backpack_flags' => [
-            '--disable-notifications'=> true,
-        ],
-
-        // ...
-   ],
-```
-
-4) [optional] Modify your backup options in ```config/backup.php``` (which is `spatie/laravel-backup`'s config file), then run ```php artisan backup:run``` to make sure it's still working.
+**[TIP]** When you modify your options in `config/backup.php` or `config/backpack/backupmanager.php`, please run manually `php artisan backup:run` to make sure it's still working after your changes. **NOTE**: `php artisan optimize:clear` and/or `php artisan config:clear` might be needed before the `backup:run` command.
 
 5) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 
@@ -67,8 +45,9 @@ As far as `config/backpack/backupmanager.php` it configures how the `Backup` but
 
 protected function schedule(Schedule $schedule)
 {
-   $schedule->command('backup:clean')->daily()->at('04:00');
-   $schedule->command('backup:run')->daily()->at('05:00');
+    // if you are not using notifications you should add the `--disable-notifications` flag to this commands
+    $schedule->command('backup:clean')->daily()->at('04:00');
+    $schedule->command('backup:run')->daily()->at('05:00');
 }
 ```
 
@@ -80,35 +59,77 @@ You can do that in your `config/database.php` file, where you define your databa
 
 ```php
 'mysql' => [
-            'driver'            => 'mysql',
-            'host'              => env('DB_HOST', 'localhost'),
-            'database'          => env('DB_DATABASE', 'forge'),
-            'username'          => env('DB_USERNAME', 'forge'),
-            'password'          => env('DB_PASSWORD', ''),
-            'charset'           => 'utf8',
-            'collation'         => 'utf8_unicode_ci',
-            'prefix'            => '',
-            'strict'            => false,
-            'engine'            => null,
-            'dump' => [
- 
-               'dump_binary_path' => '/path/to/directory/', // only the path, without `mysqldump` or `pg_dump`
-               // 'dump_binary_path' => '/Applications/MAMP/Library/bin/', // works for MAMP on Mac OS
-               // 'dump_binary_path' => '/opt/homebrew/bin/', // works for Laravel Valet on Mac OS
-               'use_single_transaction',
-               'timeout' => 60 * 5, // 5 minute timeout
-               // 'exclude_tables' => ['table1', 'table2'],
-               // 'add_extra_option' => '--optionname=optionvalue',
-            ]
-        ],
+    'driver'            => 'mysql',
+    'host'              => env('DB_HOST', 'localhost'),
+    'database'          => env('DB_DATABASE', 'forge'),
+    'username'          => env('DB_USERNAME', 'forge'),
+    'password'          => env('DB_PASSWORD', ''),
+    'charset'           => 'utf8',
+    'collation'         => 'utf8_unicode_ci',
+    'prefix'            => '',
+    'strict'            => false,
+    'engine'            => null,
+    'dump' => [
+
+        'dump_binary_path' => '/path/to/directory/', // only the path, without `mysqldump` or `pg_dump`
+        // 'dump_binary_path' => '/Applications/MAMP/Library/bin/', // works for MAMP on Mac OS
+        // 'dump_binary_path' => '/opt/homebrew/bin/', // works for Laravel Valet on Mac OS
+        'use_single_transaction',
+        'timeout' => 60 * 5, // 5 minute timeout
+        // 'exclude_tables' => ['table1', 'table2'],
+        // 'add_extra_option' => '--optionname=optionvalue',
+    ]
+],
 ```
 
 ## Usage
 
-Point and click, baby. Point and click.
+This should be a point-and-click interface where you can create and download backups at any time.
 
 Try at **your-project-domain/admin/backup**
 
+## Upgrading from 3.x to 4.x
+
+Change your required version to `"backpack/backupmanager": "^4.0"` and run `composer update backpack/backupmanager`.
+
+We removed the overrides of spatie config from our package publishing process, from now on you can do the regular spatie backup configuration in `config/backup.php` and the customized backpack configuration in `config/backpack/backupmanager`.
+
+**1)** Publish the new config file `php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag="backup-config"`. This will generate the `config/backpack/backupmanager.php` file. By default backpack uses `--disable-notifications` flag, remove it if you are using notifications.
+
+**2)** If you have configured `backpack_flags` in `config/backup` you should now move them to the new config, under the key: `artisan_command_on_button_click`. 
+
+```php
+// This command will be run when user click on the "Create a new backup" button
+// You can add flags to this like --only-db --only-files --only-to-disk=name-of-disk --disable-notifications
+// Details here: https://spatie.be/docs/laravel-backup/v8/taking-backups/overview
+'artisan_command_on_button_click' => 'backup:run --disable-notifications',
+```
+
+**3)** If you didn't do anymore configs you can now safely remove the `config/backup.php` file and there is no need to re-publish the spatie config, **jump to step 5**.
+
+**4)** If you are customizing other options in `config/backup.php` file make sure that your changes are compatible with the new config (it should be), otherwise save your config file in some other place, force publish the v8 spatie configuration file with `php artisan vendor:publish --force --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and then re-configure what you need. 
+
+**5)** You may need to clear the cache with `php artisan optimize:clear` and/or `php artisan config:clear`.
+
+**6)** Manually run from console the `backup:run` command to make sure it's working, use `backup:run --disable-notifications` if you are not using notifications.
+
+**7)** If you are **scheduling your backup jobs** make sure to also use the apropriate synthax in the commands. In previous backup versions the notification exceptions would **not be reported** and your scripts would run fine even if an exception was thrown. Now **they report**, so to avoid the exceptions halting your scripts in the notification part, **you need to explicitly tell the backup script that you don't want notifications** if you didn't configure them:
+
+```php
+// app/Console/Kernel.php
+
+protected function schedule(Schedule $schedule)
+{
+    // this would work previously even if you didn't configured notifications, 
+    // it would throw an exception but it was not reported, so script is not halted.
+    $schedule->command('backup:clean')->daily()->at('04:00');
+
+    // now if you don't use notifications you should explicitly tell that to backup
+    // otherwise the same exception will be thrown, but this time reported, 
+    // halting the script execution.
+    $schedule->command('backup:clean --disable-notifications')->daily()->at('04:00');
+}
+```
 
 ## Upgrading from 2.x to 3.x
 
@@ -122,14 +143,14 @@ Change your required version to ```"backpack/backupmanager": "^3.0",``` and run 
 3) republish the config files: ```php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider"```
 4) change your db configuration in ```config/database.php``` to use the new dump configuration (all options in one array; the example below is for MAMP on MacOS):
 
-```
-            'dump' => [
-               'dump_binary_path' => '/Applications/MAMP/Library/bin/', // only the path, so without `mysqldump` or `pg_dump`
-               'use_single_transaction',
-               'timeout' => 60 * 5, // 5 minute timeout
-               // 'exclude_tables' => ['table1', 'table2'],
-               // 'add_extra_option' => '--optionname=optionvalue',
-            ]
+```php
+'dump' => [
+    'dump_binary_path' => '/Applications/MAMP/Library/bin/', // only the path, so without `mysqldump` or `pg_dump`
+    'use_single_transaction',
+    'timeout' => 60 * 5, // 5 minute timeout
+    // 'exclude_tables' => ['table1', 'table2'],
+    // 'add_extra_option' => '--optionname=optionvalue',
+]
 ```
 5) Create a backup in the interface to test it works. If it doesn't try ```php artisan backup:run``` to see what the problem is.
 
@@ -142,7 +163,7 @@ Change your required version to ```"backpack/backupmanager": "^3.0",``` and run 
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see the [releases page](https://github.com/Laravel-Backpack/BackupManager/releases/) for more information what has changed recently.
 
 ## Testing
 
