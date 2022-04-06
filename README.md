@@ -14,7 +14,7 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 > ### Security updates and breaking changes
 > Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email 2 times/year, max.
 
-![Backpack\BackupManager screenshot](https://user-images.githubusercontent.com/1032474/150080754-97dca93f-3cac-452b-9bcf-cc51becd3055.png)
+![Backpack\BackupManager screenshot](https://user-images.githubusercontent.com/1032474/161931994-dc044bb2-a459-4863-9262-ed91f3e5e35b.gif)
 
 
 ## Install
