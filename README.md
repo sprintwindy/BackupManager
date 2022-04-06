@@ -32,12 +32,6 @@ php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServi
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
-If you need to configure aditional stuff to your backup process like notifications you should publish the spatie backup file `php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"` and check [spatie documentation on how to configure your backup system](https://spatie.be/docs/laravel-backup/v8/installation-and-setup) in `config/backup.php`
-
-As far as `config/backpack/backupmanager.php` it configures how the `Backup` button works: `backup:run --disable-notifications` by default, [check backup documentation for aditional flags](https://spatie.be/docs/laravel-backup/v8/taking-backups/overview). By default notifications are disabled with `--disable-notifications` flag since they need aditional user configuration, **but is higly recommended that you configure them**. [Check here the docs on how to do it](https://spatie.be/docs/laravel-backup/v8/sending-notifications/overview), then remove the flag `--disable-notifications` from `config/backpack/backupmanager.php` button script.
-
-**[TIP]** When you modify your options in `config/backup.php` or `config/backpack/backupmanager.php`, please run manually `php artisan backup:run` to make sure it's still working after your changes. **NOTE**: `php artisan optimize:clear` and/or `php artisan config:clear` might be needed before the `backup:run` command.
-
 5) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 
 ```php
@@ -55,7 +49,7 @@ protected function schedule(Schedule $schedule)
 
 If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location.
 
-You can do that in your `config/database.php` file, where you define your database credentials, by adding the dump variables. Example for Mac OS X's MAMP:
+You can do that in your `config/database.php` file, where you define your database credentials, by adding the dump variables. Here's an example:
 
 ```php
 'mysql' => [
@@ -87,6 +81,15 @@ You can do that in your `config/database.php` file, where you define your databa
 This should be a point-and-click interface where you can create and download backups at any time.
 
 Try at **your-project-domain/admin/backup**
+
+## Configuration & Troubleshooting
+
+For additional configuration (eg. notifications):
+- publish the spatie backup file `php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag="backup-config"`
+- see the [spatie/laravel-backup documentation](https://spatie.be/docs/laravel-backup/v8/installation-and-setup)  on how to configure your backup system in `config/backup.php`; **it is higly recommended that you at least [configure the notifications](https://spatie.be/docs/laravel-backup/v8/sending-notifications/overview)**;
+- see `config/backpack/backupmanager.php` for configurating how the backup is run from the interface; by default, it does `backup:run --disable-notifications`, but after you've configured notifications, you can remove that flag (or add others);
+
+**[TIP]** When you modify your options in `config/backup.php` or `config/backpack/backupmanager.php`, please run manually `php artisan backup:run` to make sure it's still working after your changes. **NOTE**: `php artisan optimize:clear` and/or `php artisan config:clear` might be needed before the `backup:run` command.
 
 ## Upgrading
 
