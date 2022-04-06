@@ -19,7 +19,7 @@ An admin interface for [spatie/laravel-backup](https://github.com/spatie/laravel
 
 ## Install
 
-1) In your terminal
+1) In your terminal:
 
 ``` bash
 # Install the package
@@ -32,7 +32,7 @@ php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServi
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
-5) [optional] Instruct Laravel to run the backups automatically in your console kernel:
+2) [optional] Instruct Laravel to run the backups automatically in your console kernel:
 
 ```php
 // app/Console/Kernel.php
@@ -45,11 +45,9 @@ protected function schedule(Schedule $schedule)
 }
 ```
 
-6) Check that it works
+3) Check that it works
 
-If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location.
-
-You can do that in your `config/database.php` file, where you define your database credentials, by adding the dump variables. Here's an example:
+If the "unknown error" yellow bubble is thrown and you see the "_Backup failed because The dump process failed with exitcode 127 : Command not found._" error in the log file, either mysqldump / pg_dump is not installed or you need to specify its location. You can do that in your `config/database.php` file, where you define your database credentials, by adding the dump variables. Here's an example:
 
 ```php
 'mysql' => [
