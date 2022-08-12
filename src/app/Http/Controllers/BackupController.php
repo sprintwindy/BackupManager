@@ -49,7 +49,7 @@ class BackupController extends Controller
 
         // reverse the backups, so the newest one would be on top
         $this->data['backups'] = array_reverse($this->data['backups']);
-        $this->data['title'] = trans('backupmanager::backups');
+        $this->data['title'] = trans('backpack::backup.backups');
 
         return view('backupmanager::backup', $this->data);
     }
