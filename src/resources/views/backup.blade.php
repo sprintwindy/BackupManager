@@ -8,8 +8,8 @@ $breadcrumbs = [
 @endphp
 
 @section('header')
-<section class="container-fluid">
-    <h2><span class="text-capitalize">{{ trans('backpack::backup.backups') }}</span></h2>
+<section class="container-fluid" bp-section="page-header">
+    <h1 bp-section="page-heading" class="text-capitalize">{{ trans('backpack::backup.backups') }}</h1>
 </section>
 @endsection
 
