@@ -27,7 +27,6 @@
         "spatie/laravel-backup": "^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^9.0||^7.0",
         "scrutinizer/ocular": "~1.7|~1.1"
     },
     "autoload": {
@@ -35,18 +34,7 @@
             "Backpack\\BackupManager\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Backpack\\BackupManager\\Test\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit --testdox"
-    },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
         "laravel": {
             "providers": [
                 "Backpack\\BackupManager\\BackupManagerServiceProvider"
