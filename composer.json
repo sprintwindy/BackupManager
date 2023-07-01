@@ -34,11 +34,6 @@
             "Backpack\\BackupManager\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Backpack\\BackupManager\\Test\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": [
