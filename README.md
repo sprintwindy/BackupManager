@@ -28,7 +28,7 @@ composer require backpack/backupmanager
 # Publish the backup and backupmanager configs and lang files:
 php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag=backup-config --tag=lang
 
-# [optional] Add a sidebar_content item for it
+# [optional] Add a menu item for it
 # For Backpack v6
 php artisan backpack:add-menu-content "<x-backpack::menu-item title='Backups' icon='la la-hdd-o' :link=\"backpack_url('backup')\" />"
 # For Backpack v5 or v4
