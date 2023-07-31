@@ -28,7 +28,10 @@ composer require backpack/backupmanager
 # Publish the backup and backupmanager configs and lang files:
 php artisan vendor:publish --provider="Backpack\BackupManager\BackupManagerServiceProvider" --tag=backup-config --tag=lang
 
-# [optional] Add a sidebar_content item for it
+# [optional] Add a menu item for it
+# For Backpack v6
+php artisan backpack:add-menu-content "<x-backpack::menu-item title='Backups' icon='la la-hdd-o' :link=\"backpack_url('backup')\" />"
+# For Backpack v5 or v4
 php artisan backpack:add-sidebar-content "<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> Backups</a></li>"
 ```
 
@@ -113,8 +116,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Overwriting Functionality
 
-If you need to modify how this works in a project: 
-- create a ```routes/backpack/backupmanager.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package; 
+If you need to modify how this works in a project:
+- create a ```routes/backpack/backupmanager.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package;
 - create controllers/models that extend the ones in the package, and use those in your new routes file;
 - modify anything you'd like in the new controllers/models;
 
