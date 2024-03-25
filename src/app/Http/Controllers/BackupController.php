@@ -2,17 +2,19 @@
 
 namespace Backpack\BackupManager\app\Http\Controllers;
 
-use Artisan;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
-use Log;
-use Request;
-use Storage;
 
 class BackupController extends Controller
 {
+    protected array $data;
+
     public function index()
     {
         if (!count(config('backup.backup.destination.disks'))) {
@@ -38,7 +40,7 @@ class BackupController extends Controller
                         'filePath'     => $file,
                         'fileName'     => $fileName,
                         'fileSize'     => round((int) $disk->size($file) / 1048576, 2),
-                        'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file))->formatLocalized('%d %B %Y, %H:%M'),
+                        'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file))->isoFormat('DD MMMM YYYY, HH:mm'),
                         'diskName'     => $diskName,
                         'downloadLink' => is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true) ? $downloadLink : null,
                         'deleteLink'   => $deleteLink,
