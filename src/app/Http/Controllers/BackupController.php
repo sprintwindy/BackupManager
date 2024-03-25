@@ -2,14 +2,13 @@
 
 namespace Backpack\BackupManager\app\Http\Controllers;
 
-
 use Carbon\Carbon;
-use \Exception;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 
 class BackupController extends Controller
@@ -18,7 +17,7 @@ class BackupController extends Controller
 
     public function index()
     {
-        if (! count(config('backup.backup.destination.disks'))) {
+        if (!count(config('backup.backup.destination.disks'))) {
             abort(500, trans('backpack::backup.no_disks_configured'));
         }
 
