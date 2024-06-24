@@ -40,7 +40,7 @@ class BackupController extends Controller
                         'filePath'     => $file,
                         'fileName'     => $fileName,
                         'fileSize'     => round((int) $disk->size($file) / 1048576, 2),
-                        'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file))->isoFormat('DD MMMM YYYY, HH:mm'),
+                        'lastModified' => Carbon::createFromTimeStamp($disk->lastModified($file), config('app.timezone'))->isoFormat('DD MMMM YYYY, HH:mm'),
                         'diskName'     => $diskName,
                         'downloadLink' => is_a($disk->getAdapter(), LocalFilesystemAdapter::class, true) ? $downloadLink : null,
                         'deleteLink'   => $deleteLink,
