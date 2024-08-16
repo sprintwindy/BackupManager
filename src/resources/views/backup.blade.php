@@ -15,7 +15,7 @@ $breadcrumbs = [
 
 @section('content')
 {{-- Default box --}}
-<button id="create-new-backup-button" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/create') }}" class="btn btn-primary mb-2">
+<button id="create-new-backup-button" href="{{ url(config('backpack.base.route_prefix', 'admin').'/backup/create') }}" bp-button="backup" class="btn btn-primary mb-2">
     <i class="la la-spinner"></i>
     <i class="la la-plus"></i>
     <span>{{ trans('backpack::backup.create_a_new_backup') }}</span>
@@ -42,12 +42,12 @@ $breadcrumbs = [
                     <td class="text-right">{{ $backup->fileSize }} MB</td>
                     <td class="text-right">
                         @if ($backup->downloadLink)
-                        <a class="btn btn-sm btn-link" data-button-type="download" href="{{ $backup->downloadLink }}">
-                            <i class="la la-cloud-download"></i> {{ trans('backpack::backup.download') }}
+                        <a class="btn btn-sm btn-link" data-button-type="download" bp-button="backup-download" href="{{ $backup->downloadLink }}">
+                            <i class="la la-cloud-download"></i> <span> {{ trans('backpack::backup.download') }} </span>
                         </a>
                         @endif
-                        <a class="btn btn-sm btn-link" data-button-type="delete" href="{{ $backup->deleteLink }}">
-                            <i class="la la-trash-o"></i> {{ trans('backpack::backup.delete') }}
+                        <a class="btn btn-sm btn-link" data-button-type="delete" bp-button="backup-delete" href="{{ $backup->deleteLink }}">
+                            <i class="la la-trash-o"></i> <span> {{ trans('backpack::backup.delete') }} </span>
                         </a>
                     </td>
                 </tr>
