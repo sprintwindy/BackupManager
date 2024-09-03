@@ -26,7 +26,7 @@ return [
     'delete_confirmation_message'    => 'Säkerhetskopieringsfilen togs bort.',
     'delete_error_title'             => 'Fel',
     'delete_error_message'           => 'Säkerhetskopieringsfilen har INTE tagits bort.',
-    'delete_cancel_title'            => "Det är okej",
+    'delete_cancel_title'            => 'Det är okej',
     'delete_cancel_message'          => 'Säkerhetskopieringsfilen har INTE tagits bort.',
     'create_confirmation_title'      => 'Säkerhetskopiering har påbörjats.',
     'create_error_title'             => 'Säkerhetskopieringsfel',
