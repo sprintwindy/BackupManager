@@ -1,5 +1,5 @@
 {
-    "name": "backpack/backupmanager",
+    "name": "sprintwindy/backupmanager",
     "description": "Admin interface for managing backups in Backpack, on Laravel 5.2+",
     "keywords": [
         "dick",
@@ -23,7 +23,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "backpack/crud": "^6.0",
         "spatie/laravel-backup": "^8.0"
     },
     "require-dev": {
