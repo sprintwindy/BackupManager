@@ -23,7 +23,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "spatie/laravel-backup": "^8.0"
+        "spatie/laravel-backup": "^7.0"
     },
     "require-dev": {
         "scrutinizer/ocular": "~1.7|~1.1"
